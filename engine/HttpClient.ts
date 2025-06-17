@@ -26,9 +26,11 @@ export class HttpClient
 
     public static Native(url: string, post?: boolean, params?: any): Promise<string> {
         return new Promise(function (resolve, reject) {
-            (window as any).net["native"](url, function (result: any) {
+            var net = new (window as any).Lampa.Reguest();
+            net["native"](url, function (result: any) {
                 if (typeof result === 'object') resolve(JSON.stringify(result));
                 else resolve(result);
+                net.clear();
             }, reject, post, params);
         });
     }
