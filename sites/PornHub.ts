@@ -257,7 +257,7 @@ export class PornHub {
         ];
 
         var sortname = sortmenu.find(i => i.playlist_url.endsWith(`&o=${sort}`));
-        var catname = catmenu.find(i => i.playlist_url.includes(`?c=${c}`));
+        var catname = catmenu.find(i => i.playlist_url.includes(`?c=${c}&`));
 
         return [
             new MenuItem("Поиск", host + '/search', "search_on"),
