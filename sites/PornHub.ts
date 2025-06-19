@@ -55,8 +55,8 @@ export class PornHub {
         else
         {
             const videorows = html.split(/id="(mostRecentVideosSection|moreData|content-tv-container|lazyVids|videoSearchResult)"/);
-            if (videorows.length > 1)
-                videoCategory = videorows[1].split('</ul>')[0];
+            if (videorows.length > 2)
+                videoCategory = videorows[2];
         }
 
         if (videoCategory == null)
