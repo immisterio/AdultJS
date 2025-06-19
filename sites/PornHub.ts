@@ -45,7 +45,7 @@ export class PornHub {
         {
             const ids = html.split("id=\"videoCategory\"");
             if (ids.length > 1)
-                videoCategory = ids[1];
+                videoCategory = ids[1].split('</ul>')[0];
         }
         else if (html.includes("videoList clearfix browseVideo-tabSplit")) {
             const ids = html.split("videoList clearfix browseVideo-tabSplit");
@@ -55,8 +55,8 @@ export class PornHub {
         else
         {
             const videorows = html.split(/id="(mostRecentVideosSection|moreData|content-tv-container|lazyVids|videoSearchResult)"/);
-            if (videorows.length > 2)
-                videoCategory = videorows[2];
+            if (videorows.length > 1)
+                videoCategory = videorows[1].split('</ul>')[0];
         }
 
         if (videoCategory == null)
