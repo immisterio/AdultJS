@@ -17,21 +17,24 @@ export class Xvideos {
             const urlObj = new URL(reqUri, Xvideos.host);
             const search = urlObj.searchParams.get('search') || '';
             const sort = urlObj.searchParams.get('sort') || '';
+            const c = urlObj.searchParams.get('c') || '';
             const pg = parseInt(urlObj.searchParams.get('pg') || '1', 10);
 
-            const url = this.buildUrl(Xvideos.host, search, sort, pg);
+            const url = this.buildUrl(Xvideos.host, search, sort, c, pg);
             const html = await HttpClient.Get(url);
 
             return {
-                menu: this.Menu(sort),
+                menu: this.Menu(sort, c),
                 list: this.Playlist(html)
             };
         }
     }
 
-    buildUrl(host: string, search: string, sort: string, pg: number): string {
+    buildUrl(host: string, search: string, sort: string, c: string, pg: number): string {
         if (search) {
             return `${host}/?k=${encodeURIComponent(search)}&p=${pg}`;
+        } else if (c) {
+            return `${host}/c/s:${sort === 'top' ? 'rating' : 'uploaddate'}/${c}/${pg}`;
         } else {
             if (sort === 'top') {
                 return `${host}/best/${this.getLastMonth()}/${pg}`;
@@ -88,7 +91,7 @@ export class Xvideos {
         return playlists;
     }
 
-    Menu(sort: string): MenuItem[] {
+    Menu(sort: string, c: string): MenuItem[] {
         const url = Xvideos.host ;
         const menu: MenuItem[] = [
             new MenuItem('Поиск', url, 'search_on')
@@ -98,11 +101,58 @@ export class Xvideos {
             'submenu',
             undefined,
             [
-                new MenuItem('Новое', url),
-                new MenuItem('Лучшие', url + `?sort=top`)
+                new MenuItem('Новое', url + `?c=${c}`),
+                new MenuItem('Лучшие', url + `?sort=top&c=${c}`)
             ]
         );
         menu.push(menusort);
+
+        const catmenu = [
+            new MenuItem("Все", url + `?sort=${sort}`),
+            new MenuItem("Азиат", url + `?sort=${sort}&c=Asian_Woman-32`),
+            new MenuItem("Анал", url + `?sort=${sort}&c=Anal-12`),
+            new MenuItem("Арабки", url + `?sort=${sort}&c=Arab-159`),
+            new MenuItem("Бисексуалы", url + `?sort=${sort}&c=Bi_Sexual-62`),
+            new MenuItem("Блондинки", url + `?sort=${sort}&c=Blonde-20`),
+            new MenuItem("Большие Попы", url + `?sort=${sort}&c=Big_Ass-24`),
+            new MenuItem("Большие Сиськи", url + `?sort=${sort}&c=Big_Tits-23`),
+            new MenuItem("Большие яйца", url + `?sort=${sort}&c=Big_Cock-34`),
+            new MenuItem("Брюнетки", url + `?sort=${sort}&c=Brunette-25`),
+            new MenuItem("В масле", url + `?sort=${sort}&c=Oiled-22`),
+            new MenuItem("Веб камеры", url + `?sort=${sort}&c=Cam_Porn-58`),
+            new MenuItem("Гэнгбэнг", url + `?sort=${sort}&c=Gangbang-69`),
+            new MenuItem("Зияющие отверстия", url + `?sort=${sort}&c=Gapes-167`),
+            new MenuItem("Зрелые", url + `?sort=${sort}&c=Mature-38`),
+            new MenuItem("Индийский", url + `?sort=${sort}&c=Indian-89`),
+            new MenuItem("Испорченная семья", url + `?sort=${sort}&c=Fucked_Up_Family-81`),
+            new MenuItem("Кончает внутрь", url + `?sort=${sort}&c=Creampie-40`),
+            new MenuItem("Куколд / Горячая Жена", url + `?sort=${sort}&c=Cuckold-237`),
+            new MenuItem("Латинки", url + `?sort=${sort}&c=Latina-16`),
+            new MenuItem("Лесбиянки", url + `?sort=${sort}&c=Lesbian-26`),
+            new MenuItem("Любительское порно", url + `?sort=${sort}&c=Amateur-65`),
+            new MenuItem("Мамочки. МИЛФ", url + `?sort=${sort}&c=Milf-19`),
+            new MenuItem("Межрассовые", url + `?sort=${sort}&c=Interracial-27`),
+            new MenuItem("Минет", url + `?sort=${sort}&c=Blowjob-15`),
+            new MenuItem("Нижнее бельё", url + `?sort=${sort}&c=Lingerie-83`),
+            new MenuItem("Попки", url + `?sort=${sort}&c=Ass-14`),
+            new MenuItem("Рыжие", url + `?sort=${sort}&c=Redhead-31`),
+            new MenuItem("Сквиртинг", url + `?sort=${sort}&c=Squirting-56`),
+            new MenuItem("Соло", url + `?sort=${sort}&c=Solo_and_Masturbation-33`),
+            new MenuItem("Сперма", url + `?sort=${sort}&c=Cumshot-18`),
+            new MenuItem("Тинейджеры", url + `?sort=${sort}&c=Teen-13`),
+            new MenuItem("Фемдом", url + `?sort=${sort}&c=Femdom-235`),
+            new MenuItem("Фистинг", url + `?sort=${sort}&c=Fisting-165`),
+            new MenuItem("Черные Женщины", url + `?sort=${sort}&c=bbw-51`),
+            new MenuItem("Черный", url + `?sort=${sort}&c=Black_Woman-30`),
+            new MenuItem("Чулки,колготки", url + `?sort=${sort}&c=Stockings-28`),
+            new MenuItem("ASMR", url + `?sort=${sort}&c=ASMR-229`)
+        ];
+        menu.push(new MenuItem(
+            `Категория: ${catmenu.find(i => i.playlist_url.endsWith(`c=${c}`))?.title || 'все'}`,
+            'submenu',
+            undefined,
+            catmenu
+        ));
         return menu;
     }
 
