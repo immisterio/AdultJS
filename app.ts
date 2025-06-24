@@ -2,11 +2,13 @@ import { PornHub } from './sites/PornHub';
 import { BongaCams } from './sites/BongaCams';
 import { Xhamster } from './sites/Xhamster';
 import { Xvideos } from './sites/Xvideos';
+import { Xnxx } from './sites/Xnxx';
 
 var phub = new PornHub();
 var bgs = new BongaCams();
 var xmr = new Xhamster();
 var xvd = new Xvideos();
+var xnx = new Xnxx();
 
 
 //(async () => {
@@ -68,11 +70,10 @@ var xvd = new Xvideos();
             //    playlist_url: AppInit.Porntrex.overridehost ?? "ptx",
             //    enable: AppInit.Porntrex.enable
             //},
-            //{
-            //    title: "xnxx.com",
-            //    playlist_url: AppInit.Xnxx.overridehost ?? "xnx",
-            //    enable: AppInit.Xnxx.enable
-            //},
+            {
+                title: "xnxx.com",
+                playlist_url: Xnxx.host
+            },
             {
                 title: "bongacams.com",
                 playlist_url: BongaCams.host
@@ -94,6 +95,8 @@ var xvd = new Xvideos();
             return xmr.Invoke(url);
         else if (url.startsWith(Xvideos.host))
             return xvd.Invoke(url);
+        else if (url.startsWith(Xnxx.host))
+            return xnx.Invoke(url);
 
         return 'unknown site';
     }
