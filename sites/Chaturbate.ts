@@ -11,7 +11,7 @@ export class Chaturbate {
         const urlObj = new URL(reqUri, Chaturbate.host);
 
         if (reqUri.includes('baba=')) {
-            return new StreamLinksUnified(await this.StreamLinks(urlObj.searchParams.get('baba') || ''), false);
+            return new StreamLinksUnified(await this.StreamLinks(urlObj.searchParams.get('baba')), false);
         }
         else
         {
@@ -75,7 +75,7 @@ export class Chaturbate {
         ];
     }
 
-    async StreamLinks(baba: string): Promise<StreamLinksResult> {
+    async StreamLinks(baba: string | null): Promise<StreamLinksResult> {
         if (!baba) return new StreamLinksResult({}, []);
         const html = await HttpClient.Get(`${Chaturbate.host}/${baba}/`);
         const hls = Utils.extract(html, /(https?:\/\/[^ ]+\/playlist\.m3u8)/);

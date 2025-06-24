@@ -10,7 +10,7 @@ export class Xnxx {
     async Invoke(reqUri: string) {
         if (reqUri.includes('/video-')) {
             const html = await HttpClient.Get(reqUri);
-            return new StreamLinksUnified(await this.StreamLinks(html), reqUri.includes('&related'));
+            return new StreamLinksUnified(this.StreamLinks(html), reqUri.includes('&related'));
         }
         else
         {
@@ -77,7 +77,7 @@ export class Xnxx {
         ];
     }
 
-    async StreamLinks(html: string): Promise<StreamLinksResult> {
+    StreamLinks(html: string): StreamLinksResult {
         const stream_link = Utils.extract(html, /html5player\.setVideoHLS\('([^']+)'\);/);
         if (!stream_link) return new StreamLinksResult({}, []);
         // Поиск рекомендуемых видео
