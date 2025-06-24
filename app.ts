@@ -3,12 +3,14 @@ import { BongaCams } from './sites/BongaCams';
 import { Xhamster } from './sites/Xhamster';
 import { Xvideos } from './sites/Xvideos';
 import { Xnxx } from './sites/Xnxx';
+import { Spankbang } from './sites/Spankbang';
 
 var phub = new PornHub();
 var bgs = new BongaCams();
 var xmr = new Xhamster();
 var xvd = new Xvideos();
 var xnx = new Xnxx();
+var sbg = new Spankbang();
 
 
 //(async () => {
@@ -55,11 +57,10 @@ var xnx = new Xnxx();
             //    playlist_url: AppInit.HQporner.overridehost ?? "hqr",
             //    enable: AppInit.HQporner.enable
             //},
-            //{
-            //    title: "spankbang.com",
-            //    playlist_url: AppInit.Spankbang.overridehost ?? "sbg",
-            //    enable: AppInit.Spankbang.enable
-            //},
+            {
+                title: "spankbang.com",
+                playlist_url: Spankbang.host
+            },
             //{
             //    title: "eporner.com",
             //    playlist_url: AppInit.Eporner.overridehost ?? "epr",
@@ -97,6 +98,8 @@ var xnx = new Xnxx();
             return xvd.Invoke(url);
         else if (url.startsWith(Xnxx.host))
             return xnx.Invoke(url);
+        else if (url.startsWith(Spankbang.host))
+            return sbg.Invoke(url);
 
         return 'unknown site';
     }
