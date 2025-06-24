@@ -188,10 +188,15 @@ export class Xhamster {
         var sortname = sortmenu.find(i => uri.includes(i.playlist_url));
         var catname = catmenu.find(i => uri.includes(i.playlist_url));
 
-        return [
-            new MenuItem("Поиск", host + '/search', "search_on"),
-            new MenuItem("Сортировка: " + (sortname ? sortname.title : 'В тренде'), "submenu", undefined, sortmenu),
-            new MenuItem("Категория: " + (catname ? catname.title : 'Все'), "submenu", undefined, catmenu)
+        const menu: MenuItem[] = [
+            new MenuItem("Поиск", host + '/search', "search_on")
         ];
+
+        if (!uri.includes('/categories/'))
+            menu.push(new MenuItem("Сортировка: " + (sortname ? sortname.title : 'В тренде'), "submenu", undefined, sortmenu));
+
+        menu.push(new MenuItem("Категория: " + (catname ? catname.title : 'Все'), "submenu", undefined, catmenu));
+
+        return menu;
     }
 }
