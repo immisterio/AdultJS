@@ -8,20 +8,17 @@ export class Xvideos {
     public static host: string = 'https://www.xv-ru.com';
 
     async Invoke(reqUri: string) {
-        // Если это страница видео, возвращаем StreamLinks
         if (reqUri.includes('/video')) {
             const html = await HttpClient.Get(reqUri);
             return new StreamLinksUnified(await this.StreamLinks(html), reqUri.includes('&related'));
         }
         else
         {
-            // Преобразуем reqUri в параметры поиска, сортировки, категории и страницы
             const urlObj = new URL(reqUri, Xvideos.host);
             const search = urlObj.searchParams.get('search') || '';
             const sort = urlObj.searchParams.get('sort') || '';
             const pg = parseInt(urlObj.searchParams.get('pg') || '1', 10);
 
-            // Формируем URL для запроса HTML
             const url = this.buildUrl(Xvideos.host, search, sort, pg);
             const html = await HttpClient.Get(url);
 
@@ -110,10 +107,9 @@ export class Xvideos {
     }
 
     async StreamLinks(html: string): Promise<StreamLinksResult> {
-        // Поиск прямой ссылки на поток
         const stream_link = Utils.extract(html, /html5player\.setVideoHLS\('([^']+)'\);/);
-        if (!stream_link) return new StreamLinksResult({}, []);
-        // Поиск рекомендуемых видео
+        if (!stream_link)
+            return new StreamLinksResult({}, []);
         const related: PlaylistItem[] = [];
         const json = Utils.extract(html, /video_related=([^\n\r]+);window/);
         if (json && json.startsWith('[') && json.endsWith(']')) {
