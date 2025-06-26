@@ -636,6 +636,15 @@
       }
 
       button.on('hover:enter', function() {
+        // Проверка и создание Lampa.ParentalControl, если не существует
+        if (!Lampa.ParentalControl) {
+            Lampa.ParentalControl = {
+            query: function(success, error) {
+                // По умолчанию всегда разрешает доступ
+                if (typeof success === 'function') success();
+            }
+            };
+        }
         Lampa.ParentalControl.query(function() {
           Api.menu(function(data) {
             var items = [];
