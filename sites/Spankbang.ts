@@ -43,7 +43,7 @@ export class Spankbang {
 
     Playlist(html: string): PlaylistItem[] {
         if (!html) return [];
-        const rows = html.split('class="video-item"');
+        const rows = html.split('class="video-item responsive-page"');
         const playlists: PlaylistItem[] = [];
         for (let i = 1; i < rows.length; i++) {
             const row = rows[i];
