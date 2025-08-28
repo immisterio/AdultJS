@@ -7,7 +7,7 @@ export interface NextHubConfig {
         sort?: { [title: string]: string };
         categories?: { [title: string]: string };
     };
-    list?: { uri: string };
+    list?: { uri: string; firstpage?: string };
     search?: { uri: string };
     contentParse: {
         nodes: string;
@@ -35,5 +35,6 @@ export interface NextHubConfig {
             node: string;
             attribute: string;
         };
+        eval?: string;
     };
 } 

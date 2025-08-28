@@ -64,6 +64,7 @@ export class NextHub {
         });
         const hasSort = sortKey && sortKey.trim() !== '' && sortKey !== defaultSortKey;
 
+        // Determine base route
         if (cfg.menu?.route) {
             if (hasCategory && hasSort && cfg.menu.route['catsort']) {
                 // Both category and sort specified - use catsort route
@@ -78,12 +79,19 @@ export class NextHub {
                 // Only sort specified
                 route = cfg.menu.route['sort'];
             } else {
-                // No category or sort, use list.uri
-                route = cfg.list ? cfg.list.uri : '{host}';
+                if (page === 1 && cfg.list?.firstpage != undefined) {
+                    route = cfg.list.firstpage;
+                } else {
+                    route = cfg.list ? cfg.list.uri : '{host}';
+                }
             }
         } else {
-            // No menu.route, use list.uri
-            route = cfg.list ? cfg.list.uri : '{host}';
+            // No menu.route, use list.uri or firstpage
+            if (page === 1 && cfg.list?.firstpage != undefined) {
+                route = cfg.list.firstpage;
+            } else {
+                route = cfg.list ? cfg.list.uri : '{host}';
+            }
         }
 
         const sortSlug = hasSort && cfg.menu?.sort ? cfg.menu.sort[sortKey] : '';
@@ -280,8 +288,20 @@ export class NextHub {
             }
         }
 
+        // Check for eval extraction
+        if (cfg.view?.eval) {
+            try {
+                const evalFunction = new Function('html', cfg.view.eval);
+                const result = evalFunction(html);
+                if (result) {
+                    streams['eval'] = result;
+                }
+            } catch (error) {
+                console.error('Eval execution error:', error);
+            }
+        }
         // Check for nodeFile extraction
-        if (cfg.view?.nodeFile) {
+        else if (cfg.view?.nodeFile) {
             const doc = parseHTML(html);
             const nodeFileElement = xpathOne(doc, cfg.view.nodeFile.node);
             if (nodeFileElement) {
@@ -291,8 +311,7 @@ export class NextHub {
                 }
             }
         }
-        else
-        {
+        else {
             if (!cfg.view?.regexMatch?.pattern) {
                 return new StreamLinksResult(streams, []);
             }
