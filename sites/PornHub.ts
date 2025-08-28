@@ -113,13 +113,13 @@ export class PornHub {
     getDirectLinks(pageCode: string): string {
         const vars: [string, string][] = [];
 
-        let match = Utils.extract(pageCode, "\"hls\",\"videoUrl\":\"([^\"]+urlset\\\\/master\\.m3u[^\"]+)\"");
+        let match = Utils.extract(pageCode, "\"videoUrl\":\"([^\"]+urlset\\\\/master\\.m3u[^\"]+)\"");
         let hls = match ? match : null;
         if (hls)
             return hls;
 
         for (const q of ["1080", "720", "480", "240"]) {
-            const match = Utils.extract(pageCode, new RegExp(`"hls","videoUrl":"([^\"]+)","quality":"${q}"`));
+            const match = Utils.extract(pageCode, new RegExp(`"videoUrl":"([^\"]+)","quality":"${q}"`));
             const video = match ? match : "";
             if (video)
                 return video.replace(/\\/g, "").replace("///", "//");

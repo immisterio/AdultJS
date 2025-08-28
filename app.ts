@@ -6,6 +6,8 @@ import { Xnxx } from './sites/Xnxx';
 import { Spankbang } from './sites/Spankbang';
 import { Chaturbate } from './sites/Chaturbate';
 import { Eporner } from './sites/Eporner';
+import { NextHub } from './engine/NextHub';
+import { CONFIGS } from './sites/NextHub';
 
 
 var phub = new PornHub();
@@ -16,17 +18,18 @@ var xnx = new Xnxx();
 var sbg = new Spankbang();
 var chu = new Chaturbate();
 var epr = new Eporner();
+var nex = new NextHub(CONFIGS);
 
 
 //(async () => {
 //    //var result = await phub.Invoke('https://rt.pornhub.com/video?page=2');
 //    //var result = await phub.Invoke('https://rt.pornhub.com/view_video.php?viewkey=66c8bd7d9859f');
-
+//
 //    //var result = await bgs.Invoke('https://ukr.bongacams.com');
-
-//    var result = await xmr.Invoke('https://ru.xhamster.com/2');
+//
+//    //    var result = await xmr.Invoke('https://ru.xhamster.com/2');
 //    //var result = await xmr.Invoke('https://ru.xhamster.com/videos/sexcourt-a-case-of-tit-for-spat-natalia-starr-chantal-danielle-brazzers-xh3Bdi0');
-
+//
 //    //console.log(JSON.stringify(result, null, 2));
 //    console.log(result);
 //    process.stdin.resume();
@@ -35,11 +38,11 @@ var epr = new Eporner();
 
 
 
-// Глобальный объект для браузера
-(function() {
+//    
+(function () {
 
     function menu() {
-        return [
+        const base = [
             {
                 title: "pornhub.com",
                 playlist_url: PornHub.host + '/video'
@@ -88,30 +91,52 @@ var epr = new Eporner();
                 playlist_url: Chaturbate.host
             }
         ];
+
+        // add NextHub-driven sites (from JSON/YAML-configs)
+        CONFIGS.filter(c => c.enable).forEach(c => {
+            base.push({
+                title: c.displayname.toLowerCase(),
+                playlist_url: `nexthub://${c.displayname}?mode=list&page=1`
+            });
+        });
+
+        return base;
     }
 
-    function invk(url: string) {
+    async function invk(url: string) {
         if (url.startsWith(BongaCams.host))
-            return bgs.Invoke(url);
+            return await bgs.Invoke(url);
         else if (url.startsWith(PornHub.host))
-            return phub.Invoke(url);
+            return await phub.Invoke(url);
         else if (url.startsWith(Xhamster.host))
-            return xmr.Invoke(url);
+            return await xmr.Invoke(url);
         else if (url.startsWith(Xvideos.host))
-            return xvd.Invoke(url);
+            return await xvd.Invoke(url);
         else if (url.startsWith(Xnxx.host))
-            return xnx.Invoke(url);
+            return await xnx.Invoke(url);
         else if (url.startsWith(Spankbang.host))
-            return sbg.Invoke(url);
+            return await sbg.Invoke(url);
         else if (url.startsWith(Chaturbate.host))
-            return chu.Invoke(url);
+            return await chu.Invoke(url);
         else if (url.startsWith(Eporner.host))
-            return epr.Invoke(url);
+            return await epr.Invoke(url);
+        else if (url.startsWith('nexthub://'))
+            return await nex.Invoke(url);
+        else {
+            // Check if this is a NextHub site URL
+            const urlObj = new URL(url);
+            const nextHubSite = CONFIGS.find(c => c.enable && urlObj.hostname === new URL(c.host).hostname);
+            if (nextHubSite) {
+                // Convert to NextHub format
+                const nextHubUrl = `nexthub://${nextHubSite.displayname}?mode=view&href=${encodeURIComponent(url)}`;
+                return await nex.Invoke(nextHubUrl);
+            }
+        }
 
         return 'unknown site';
     }
 
-    // Добавляем в window глобальный объект
+    //  window  
     (window as any).AdultJS = {
         Menu: menu,
         Invoke: invk

@@ -4,5 +4,9 @@
     <None Remove="bundle.es5.js" />
     <None Remove="bundle.js" />
     <None Remove="lampa.js" />
+    <None Remove="NextHub.js" />
+    <None Remove="NextHub.js.map" />
+    <None Remove="NextHubConfig.js" />
+    <None Remove="NextHubConfig.js.map" />
   </ItemGroup>
 </Project>
