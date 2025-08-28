@@ -86,7 +86,7 @@ export class Xhamster {
     }
 
     StreamLinks(html: string): StreamLinksResult {
-        let match = /"h264":\[\{"url":"([^\"]+)"/.exec(html);
+        let match = /rel="preload" href="([^\"]+)"/.exec(html);
         let stream_link = match && match[1] ? match[1].replace(/\\/g, "") : "";
 
         if (!stream_link.includes(".m3u"))
