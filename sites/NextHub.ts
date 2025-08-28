@@ -23,7 +23,6 @@ export interface NextHubConfig {
     };
     view: {
         related?: boolean;
-        viewsource?: boolean;
         iframe?: {
             pattern: string;
         };
@@ -74,7 +73,100 @@ export const CONFIGS: NextHubConfig[] = [
                 "Мастурбация": "masturbation",
                 "Минет": "blowjob",
                 "Соло": "solo",
-                "Хардкор": "hardcore"
+                "Хардкор": "hardcore",
+                "МЖМ": "threesome-mmf",
+                "Чешское порно": "czech",
+                "Русское домашнее": "russian-amateur",
+                "Молодые": "teen",
+                "Старые с молодыми": "old-young",
+                "Студенты": "student",
+                "Азиатки": "asian",
+                "Латинки": "latina",
+                "Медсестра": "nurse",
+                "Секретарша": "secretary",
+                "Няня": "babysitter",
+                "Черлидерша": "cheerleader",
+                "Студентка": "schoolgirl",
+                "Горничная": "maid",
+                "Учительница": "teacher",
+                "Блондинки": "blonde",
+                "Брюнетки": "brunette",
+                "Рыжие": "redhead",
+                "Короткие волосы": "short-hair",
+                "Длинные волосы": "long-hair",
+                "Косички": "pigtails",
+                "В ванной": "bathroom",
+                "В машине": "car",
+                "В офисе": "office",
+                "В спальне": "bedroom",
+                "В спортзале": "gym",
+                "На кухне": "kitchen",
+                "На пляже": "beach",
+                "На природе": "outdoor",
+                "На диване": "sofa",
+                "На столе": "table",
+                "Двойное проникновение": "double-penetration",
+                "Крупным планом": "close-up",
+                "Лижет попу": "rimjob",
+                "Между сисек": "titjob",
+                "Наездница": "cowgirl",
+                "Оргазмы": "orgasm",
+                "Поза 69": "69",
+                "Раком": "doggy-style",
+                "Сквирт": "squirt",
+                "Стриптиз": "striptease",
+                "Большие жопы": "big-ass",
+                "Большой чёрный член": "bbc",
+                "Большие члены": "big-cock",
+                "Гибкие": "flexible",
+                "Красивая грудь": "nice-tits",
+                "Маленькие сиськи": "small-tits",
+                "Натуральные сиськи": "natural-tits",
+                "Красивые попки": "nice-ass",
+                "Красивые": "beautiful",
+                "Бритые письки": "shaved",
+                "Волосатая пизда": "hairy",
+                "Толстые": "bbw",
+                "Худые": "skinny",
+                "Силиконовые сиськи": "fake-tits",
+                "Интимные стрижки": "trimmed",
+                "Загорелые": "tanned",
+                "Босс": "boss",
+                "Доктор": "doctor",
+                "Тренер": "trainer",
+                "В красивом белье": "lingerie",
+                "В чулках": "stockings",
+                "На каблуках": "heels",
+                "В гольфах": "socks",
+                "Латекс": "latex",
+                "С вибратором": "vibrator",
+                "Дилдо": "dildo",
+                "Евро": "european",
+                "Йога": "yoga",
+                "Куколд": "cuckold",
+                "Межрассовое": "interracial",
+                "На публике": "public",
+                "Пикап": "pickup",
+                "Свингеры": "swingers",
+                "Секс-игрушки": "sex-toys",
+                "Страпон": "strapon",
+                "Анальная пробка": "buttplug",
+                "Бондаж": "bondage",
+                "Женское доминирование": "femdom",
+                "Подчинение": "submissive",
+                "Фистинг": "fisting",
+                "Футфетиш": "footjob",
+                "Негры": "black",
+                "Негритянки": "ebony",
+                "Негры с блондинками": "black-blonde",
+                "Буккаке": "bukkake",
+                "Сперма": "cumshot",
+                "Сперма вытекает": "creampie",
+                "Сперма на груди": "cum-on-tits",
+                "Сперма на лице": "facial",
+                "Глотает сперму": "cum-swallow",
+                "Сперма на попе": "cum-on-ass",
+                "Сперма на пизде": "cum-on-pussy"
             }
         },
         list: { uri: "page/{page}" },
@@ -85,13 +177,17 @@ export const CONFIGS: NextHubConfig[] = [
             href: { node: ".//a", attribute: "href" },
             img: { node: ".//img[@class='lzy']", attribute: "data-srcset" },
             duration: { node: ".//div[@class='itm-dur fnt-cs']" },
-            preview: { node: ".//img[@class='lzy']", attribute: "data-preview" }
+            preview: { node: ".//img[@class='lzy']", attribute: "data-preview" },
+            model: {
+                name: { node: ".//a[@class='itm-opt-mdl len_pucl']" },
+                href: { node: ".//a[@class='itm-opt-mdl len_pucl']", attribute: "href" }
+            }
         },
         view: {
             related: true,
             regexMatch: {
-                matches: ["video_alt_url", "video_url"],
-                pattern: "{value}:[\t ]*'([^']+)'"
+                matches: ["alt_url", "url"],
+                pattern: "video_{value}:[\\t ]+'([^']+)'"
             }
         }
     },
@@ -421,13 +517,247 @@ export const CONFIGS: NextHubConfig[] = [
             duration: { node: ".//div[contains(@class, 'duration')]" }
         },
         view: {
-            viewsource: true,
             iframe: {
                 pattern: "<iframe[^>]+ src=\"([^\"]+)\""
             },
             regexMatch: {
                 matches: ["video_alt_url", "video_url"],
                 pattern: "{value}:[\\t ]+'([^']+)'"
+            }
+        }
+    },
+    {
+        enable: true,
+        displayname: "Ebun",
+        host: "https://www1.ebun.tv",
+        menu: {
+            route: {
+                sort: "{host}/{sort}/{page}/",
+                cat: "{host}/categories/{cat}/{page}/",
+                catsort: "{host}/categories/{cat}/{sort}/{page}/"
+            },
+            sort: {
+                "Новинки": "",
+                "Топ рейтинга": "top-rated",
+                "Популярнаe": "most-popular"
+            },
+            categories: {
+                "Азиатки": "aziatki",
+                "Американское": "amerikanskoe",
+                "Анал": "anal",
+                "Анилингус": "anilingus",
+                "Арабское порно": "arabskoe-porno",
+                "БДСМ": "bdsm",
+                "Блондинки": "blondinki",
+                "Большие сиськи": "bolshie-siski",
+                "Большие члены": "bolshie-chleny",
+                "Бондаж": "bondaj",
+                "Брюнетки": "bryunetki",
+                "В ванной": "v-vannoy",
+                "В машине": "v-mashine",
+                "Веб камера": "veb-kamera",
+                "Вечеринки и вписки": "vecherinki-i-vpiski",
+                "Волосатые": "volosatye",
+                "Врачи и медсестры": "vrachi-i-medsestry",
+                "Ганг банг": "gang-bang",
+                "Гетры": "getry",
+                "Глубокая глотка": "glubokaya-glotka",
+                "Групповое": "gruppovoe",
+                "Двойное проникновение": "dvoynoe-proniknovenie",
+                "Дедушки": "dedushki",
+                "Дилдо": "dildo",
+                "Для женщин": "dlya-jenshchin",
+                "Домашнее": "domashnee",
+                "Дрочка": "drochka",
+                "Ебля": "eblya",
+                "Женское доминирование": "jenskoe-dominirovanie",
+                "Жены": "jeny",
+                "Жесткое": "jestkoe",
+                "ЖМЖ": "jmj",
+                "Жопы": "jopy",
+                "За деньги": "za-dengi",
+                "Зрелые": "zrelye",
+                "Зрелые с молодыми": "zrelye-s-molodymi",
+                "Игрушки": "igrushki",
+                "Измена": "izmena",
+                "Кастинг": "kasting",
+                "Кастинг Вудмана": "kasting-vudmana",
+                "Кончил в рот": "konchil-v-rot",
+                "Красивые девушки": "krasivye-devushki",
+                "Красивые сиськи": "krasivye-siski",
+                "Кремпай": "krempay",
+                "Крупным планом": "krupnym-planom",
+                "Кунилингус": "kunilingus",
+                "Латинки": "latinki",
+                "Маленькие сиськи": "malenkie-siski",
+                "Мамки": "mamki",
+                "Массаж": "massaj",
+                "Мастурбация": "masturbaciya",
+                "Межрассовое": "mejrassovoe",
+                "МЖМ": "mjm",
+                "Минет": "minet",
+                "Молодые": "molodye",
+                "Мулатки": "mulatki",
+                "На кухне": "na-kuhne",
+                "На природе": "na-prirode",
+                "На телефон": "na-telefon",
+                "Негритянки": "negrityanki",
+                "Негры": "negry",
+                "Нежное": "nejnoe",
+                "Немецкое": "nemeckoe",
+                "Оргазмы": "orgazmy",
+                "Оргия": "orgiya",
+                "От первого лица": "ot-pervogo-lica",
+                "Офис": "ofis",
+                "Пизда крупно": "pizda-krupno",
+                "Пикап": "pikap",
+                "Подчинение": "podchinenie",
+                "Порно ВК": "porno-vk",
+                "Порно подборка": "porno-podborka",
+                "Порно с разговорами": "porno-s-razgovorami",
+                "Презерватив": "prezervativ",
+                "Пьяные": "pyanye",
+                "Раком": "rakom",
+                "Русское": "russkoe",
+                "Рыжие": "ryjie",
+                "Свингеры": "svingery",
+                "Секретарши": "sekretarshi",
+                "Секс втроем": "seks-vtroem",
+                "Сексвайф и куколд": "seksvayf-i-kukold",
+                "Сквиртинг": "skvirting",
+                "Скрытая камера": "skrytaya-kamera",
+                "Сперма": "sperma",
+                "Спящие": "spyashchie",
+                "Страпон": "strapon",
+                "Студенты": "studenty",
+                "Татуировки": "tatuirovki",
+                "Толстые": "tolstye",
+                "Тренер": "trener",
+                "Учитель": "uchitel",
+                "Фетиш": "fetish",
+                "Фильмы": "porno-filmy",
+                "Фитоняшки": "fitonyashki",
+                "Фут-фетиш": "fut-fetish",
+                "Худые": "hudye",
+                "Чешское": "cheshskoe",
+                "Чулки и колготки": "chulki-i-kolgotki",
+                "Эротика": "erotika",
+                "Японское": "yaponskoe"
+            }
+        },
+        list: { uri: "latest-updates/{page}/" },
+        search: { uri: "search/{search}/{page}/" },
+        contentParse: {
+            nodes: "//div[contains(@class, 'item th-item item_new')]",
+            name: { node: ".//div[@class='item-title']" },
+            href: { node: ".//a", attribute: "href" },
+            img: { node: ".//img", attribute: "data-src" },
+            duration: { node: ".//div[@class='meta-time']" }
+        },
+        view: {
+            iframe: {
+                pattern: "<iframe[^>]+ src=\"([^\"]+)\""
+            },
+            regexMatch: {
+                matches: ["video_alt_url", "video_url"],
+                pattern: "{value}:[\\t ]+'([^']+)'"
+            }
+        }
+    },
+    {
+        enable: true,
+        displayname: "JopaOnline",
+        host: "https://jopaonline.mobi",
+        menu: {
+            route: {
+                sort: "{host}/{sort}/{page}",
+                cat: "{host}/categories/{cat}/{page}",
+                catsort: "{host}/categories/{cat}/{sort}/{page}"
+            },
+            sort: {
+                "Новинки": "",
+                "Топ рейтинга": "toprated",
+                "Популярнаe": "popular"
+            },
+            categories: {
+                "Мамки": "mamki",
+                "Русское": "russkoe",
+                "Жесткое": "zhestkoe",
+                "Зрелые": "zrelye",
+                "Измена": "izmena",
+                "Красотки": "krasotki",
+                "Домашнее": "domashnee",
+                "Большие члены": "big-cock",
+                "Групповое": "gruppovoe",
+                "Анал": "anal",
+                "Студенты": "studenty",
+                "Азиатки": "asian",
+                "Красивый секс": "krasiviy-seks",
+                "Большие сиськи": "bolshie-siski",
+                "Лесбиянки": "lesbiyanki",
+                "Жопы": "zhopy",
+                "Двойное проникновение": "dvoynoe-proniknovenie",
+                "Молодые": "molodye",
+                "Пикап": "pickap",
+                "Мастурбация": "masturbation",
+                "В ванной": "v-vannoi",
+                "Негры": "s-negrami",
+                "Мулатки": "mulatki",
+                "Худые": "hudenkie",
+                "Чулки": "stockings",
+                "Раком": "rakom",
+                "Минет": "minet",
+                "Рыжие": "redhead",
+                "Блондинки": "blonde",
+                "Брюнетки": "bryunetki",
+                "Межрасовое": "mejrassovyy"
+            }
+        },
+        list: { uri: "{page}" },
+        search: { uri: "search/{search}/{page}" },
+        contentParse: {
+            nodes: "//div[@class='th']",
+            name: { node: ".//p" },
+            href: { node: ".//a", attribute: "href" },
+            img: { node: ".//img", attribute: "src" },
+            duration: { node: ".//div[@class='th-duration']" },
+            preview: { node: ".//img", attribute: "data-preview" }
+        },
+        view: {
+            related: true,
+            regexMatch: {
+                matches: ["url3", "url2", "url"],
+                pattern: "video_alt_{value}:[\\t ]+'([^']+)'"
+            }
+        }
+    },
+    {
+        enable: true,
+        displayname: "NoodleMagazine",
+        host: "https://adult.noodlemagazine.com",
+        menu: {
+            route: {
+                sort: "{host}/{sort}/week?p={page}"
+            },
+            sort: {
+                "Новинки": "",
+                "Популярное": "popular"
+            }
+        },
+        list: { uri: "now?p={page}" },
+        search: { uri: "video/{search}?p={page}" },
+        contentParse: {
+            nodes: "//div[contains(@class, 'item')]",
+            name: { node: ".//div[@class='title']" },
+            href: { node: ".//a", attribute: "href" },
+            img: { node: ".//img", attribute: "data-src" },
+            duration: { node: ".//div[@class='m_time']" },
+            preview: { node: ".//div", attribute: "data-trailer_url" }
+        },
+        view: {
+            related: true,
+            regexMatch: {
+                pattern: "\"file\":\"([^\"]+)\""
             }
         }
     }
