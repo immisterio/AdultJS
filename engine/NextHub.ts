@@ -2,7 +2,7 @@ import { HttpClient } from '../engine/HttpClient';
 import { PlaylistItem } from '../models/PlaylistItem';
 import { MenuItem } from '../models/MenuItem';
 import { StreamLinksResult, StreamLinksUnified } from '../models/StreamLinksResult';
-import { CONFIGS, NextHubConfig } from '../sites/NextHub';
+import { NextHubConfig } from '../models/NextHubConfig';
 
 function format(str: string, params: Record<string, string>): string {
     return str.replace(/\{([^}]+)\}/g, (_, k) => params[k] ?? '');
@@ -45,7 +45,7 @@ function firstAttr(el: Element | null, attrs?: string[] | string, fallback?: str
 export class NextHub {
     public static host: string = 'nexthub://';
 
-    constructor(private readonly cfgs: NextHubConfig[] = CONFIGS) { }
+    constructor(private readonly cfgs: NextHubConfig[]) { }
 
     private buildListUrl(cfg: NextHubConfig, page: number, sortKey?: string, catSlug?: string): string {
         let route: string;

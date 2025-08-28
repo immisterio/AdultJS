@@ -7,7 +7,42 @@ import { Spankbang } from './sites/Spankbang';
 import { Chaturbate } from './sites/Chaturbate';
 import { Eporner } from './sites/Eporner';
 import { NextHub } from './engine/NextHub';
-import { CONFIGS } from './sites/NextHub';
+
+// Import all NextHub configurations
+import { LenkinoConfig } from './sites/Lenkino';
+import { LenpornoConfig } from './sites/Lenporno';
+import { Video24Config } from './sites/24video';
+import { BigBossConfig } from './sites/BigBoss';
+import { EbasosConfig } from './sites/Ebasos';
+import { EbunConfig } from './sites/Ebun';
+import { JopaOnlineConfig } from './sites/JopaOnline';
+import { NoodleMagazineConfig } from './sites/NoodleMagazine';
+import { PorndigConfig } from './sites/Porndig';
+import { PornkConfig } from './sites/Pornk';
+import { Porno365Config } from './sites/Porno365';
+import { Porno666Config } from './sites/Porno666';
+import { PornoBrizConfig } from './sites/PornoBriz';
+import { SemBatsaConfig } from './sites/SemBatsa';
+import { SosushkaConfig } from './sites/Sosushka';
+
+// Combine all configurations
+const CONFIGS = [
+    LenkinoConfig,
+    LenpornoConfig,
+    Video24Config,
+    BigBossConfig,
+    EbasosConfig,
+    EbunConfig,
+    JopaOnlineConfig,
+    NoodleMagazineConfig,
+    PorndigConfig,
+    PornkConfig,
+    Porno365Config,
+    Porno666Config,
+    PornoBrizConfig,
+    SemBatsaConfig,
+    SosushkaConfig
+];
 
 
 var phub = new PornHub();
@@ -96,7 +131,7 @@ var nex = new NextHub(CONFIGS);
         CONFIGS.filter(c => c.enable).forEach(c => {
             base.push({
                 title: c.displayname.toLowerCase(),
-                playlist_url: `nexthub://${c.displayname}?mode=list&page=1`
+                playlist_url: `nexthub://${c.displayname}?mode=list`
             });
         });
 
