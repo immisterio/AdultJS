@@ -31,5 +31,9 @@ export interface NextHubConfig {
             pattern: string;
             format?: string;
         };
+        nodeFile?: {
+            node: string;
+            attribute: string;
+        };
     };
 } 

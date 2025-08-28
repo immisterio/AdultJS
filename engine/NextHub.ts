@@ -32,13 +32,17 @@ function xpathAll(doc: Document, expr: string, ctx?: Node): Node[] {
 
 function firstAttr(el: Element | null, attrs?: string[] | string, fallback?: string): string {
     if (!el) return '';
+
     if (Array.isArray(attrs)) {
         for (const a of attrs) {
             const v = el.getAttribute(a);
-            if (v) return v;
+            if (v && v.trim() !== '') {
+                return v;
+            }
         }
         return fallback || '';
     }
+
     return el.getAttribute(attrs || 'src') || fallback || '';
 }
 
@@ -202,7 +206,7 @@ export class NextHub {
 
             const title = nameNode ? (nameNode.textContent || '').trim() : (hrefNode?.getAttribute('title') || '');
             const href = hrefNode ? (hrefNode.getAttribute(parseConfig.href.attribute || 'href') || '') : '';
-            let img = parseConfig.img ? firstAttr(imgNode, (parseConfig.img.attributes as any) || parseConfig.img.attribute || 'src') : '';
+            let img = parseConfig.img ? firstAttr(imgNode, parseConfig.img.attributes || parseConfig.img.attribute || 'src') : '';
             const preview = parseConfig.preview ? firstAttr(previewNode, parseConfig.preview.attribute || 'data-preview') : null;
             const time = durNode ? (durNode.textContent || '').trim() : null;
 
@@ -276,48 +280,62 @@ export class NextHub {
             }
         }
 
-        if (!cfg.view?.regexMatch?.pattern) {
-            return new StreamLinksResult(streams, []);
+        // Check for nodeFile extraction
+        if (cfg.view?.nodeFile) {
+            const doc = parseHTML(html);
+            const nodeFileElement = xpathOne(doc, cfg.view.nodeFile.node);
+            if (nodeFileElement) {
+                const fileUrl = firstAttr(nodeFileElement as Element, cfg.view.nodeFile.attribute);
+                if (fileUrl) {
+                    streams['file'] = fileUrl;
+                }
+            }
         }
-
-        // Get matches array or use default
-        const matches = cfg.view.regexMatch.matches || [''];
-
-        // Process each match value - stop after first successful match
-        for (const matchValue of matches) {
-            let pattern = cfg.view.regexMatch.pattern;
-
-            // Replace {value} placeholder with current match value
-            if (pattern.includes('{value}')) {
-                pattern = pattern.replace('{value}', matchValue);
+        else
+        {
+            if (!cfg.view?.regexMatch?.pattern) {
+                return new StreamLinksResult(streams, []);
             }
 
-            const rx = new RegExp(pattern, 'g');
-            let m: RegExpExecArray | null;
-            let i = 0;
-            let foundMatch = false;
+            // Get matches array or use default
+            const matches = cfg.view.regexMatch.matches || [''];
 
-            while ((m = rx.exec(html))) {
-                const url = m[1];
-                if (!url) continue;
+            // Process each match value - stop after first successful match
+            for (const matchValue of matches) {
+                let pattern = cfg.view.regexMatch.pattern;
 
-                // Apply format if specified
-                let finalUrl = url;
-                if (cfg.view.regexMatch.format) {
-                    finalUrl = cfg.view.regexMatch.format
-                        .replace('{host}', cfg.host)
-                        .replace('{value}', url);
+                // Replace {value} placeholder with current match value
+                if (pattern.includes('{value}')) {
+                    pattern = pattern.replace('{value}', matchValue);
                 }
 
-                const key = matchValue + (i ? '_' + i : '');
-                streams[key] = finalUrl;
-                i++;
-                foundMatch = true;
-            }
+                const rx = new RegExp(pattern, 'g');
+                let m: RegExpExecArray | null;
+                let i = 0;
+                let foundMatch = false;
 
-            // If we found a match for this quality, stop processing other qualities
-            if (foundMatch) {
-                break;
+                while ((m = rx.exec(html))) {
+                    const url = m[1];
+                    if (!url) continue;
+
+                    // Apply format if specified
+                    let finalUrl = url;
+                    if (cfg.view.regexMatch.format) {
+                        finalUrl = cfg.view.regexMatch.format
+                            .replace('{host}', cfg.host)
+                            .replace('{value}', url);
+                    }
+
+                    const key = matchValue + (i ? '_' + i : '');
+                    streams[key] = finalUrl;
+                    i++;
+                    foundMatch = true;
+                }
+
+                // If we found a match for this quality, stop processing other qualities
+                if (foundMatch) {
+                    break;
+                }
             }
         }
 
