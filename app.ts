@@ -27,6 +27,8 @@ import { SosushkaConfig } from './sites/Sosushka';
 import { YoujizzConfig } from './sites/Youjizz';
 import { VpornoConfig } from './sites/Vporno';
 import { PornoboltConfig } from './sites/Pornobolt';
+import { PornoAktConfig } from './sites/PornoAkt';
+import { PornOneConfig } from './sites/PornOne';
 
 // Combine all configurations
 const CONFIGS = [
@@ -47,7 +49,9 @@ const CONFIGS = [
     SosushkaConfig,
     YoujizzConfig,
     VpornoConfig,
-    PornoboltConfig
+    PornoboltConfig,
+    PornoAktConfig,
+    PornOneConfig
 ];
 
 
