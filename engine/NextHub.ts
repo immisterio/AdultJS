@@ -237,8 +237,17 @@ export class NextHub {
             while ((m = rx.exec(html))) {
                 const url = m[1];
                 if (!url) continue;
+
+                // Apply format if specified
+                let finalUrl = url;
+                if (cfg.view.regexMatch.format) {
+                    finalUrl = cfg.view.regexMatch.format
+                        .replace('{host}', cfg.host)
+                        .replace('{value}', url);
+                }
+
                 const key = matchValue + (i ? '_' + i : '');
-                streams[key] = url;
+                streams[key] = finalUrl;
                 i++;
             }
         }
