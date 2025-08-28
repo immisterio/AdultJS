@@ -29,6 +29,9 @@ import { VpornoConfig } from './sites/Vporno';
 import { PornoboltConfig } from './sites/Pornobolt';
 import { PornoAktConfig } from './sites/PornoAkt';
 import { PornOneConfig } from './sites/PornOne';
+import { RusvideosConfig } from './sites/Rusvideos';
+import { VepornConfig } from './sites/Veporn';
+import { GayPornTubeConfig } from './sites/GayPornTube';
 
 // Combine all configurations
 const CONFIGS = [
@@ -51,7 +54,10 @@ const CONFIGS = [
     VpornoConfig,
     PornoboltConfig,
     PornoAktConfig,
-    PornOneConfig
+    PornOneConfig,
+    RusvideosConfig,
+    VepornConfig,
+    GayPornTubeConfig
 ];
 
 
