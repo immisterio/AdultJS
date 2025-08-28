@@ -4,6 +4,7 @@ export const VtraheConfig: NextHubConfig = {
     enable: true,
     displayname: "Vtrahe",
     host: "https://vtrahehd.tv",
+    charset: "windows-1251",
     menu: {
         route: {
             sort: "{host}/{sort}",

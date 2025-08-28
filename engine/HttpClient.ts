@@ -19,13 +19,20 @@ export class HttpClient
         return result;
     }
 
-    public static async Get(url: string, headers?: { [key: string]: string }): Promise<string> {
+    public static async Get(url: string, headers?: { [key: string]: string }, charset?: string): Promise<string> {
         if (HttpClient.isAndroid) 
             return HttpClient.Native(url);
 
         const finalHeaders = HttpClient.ensureHeaders(headers);
         const options: any = { method: 'GET', headers: finalHeaders };
         const response = await fetch(url, options);
+
+        if (charset != undefined) {
+            const arrayBuffer = await response.arrayBuffer();
+            const decoder = new TextDecoder(charset);
+            return decoder.decode(arrayBuffer);
+        }
+
         return await response.text();
     }
 

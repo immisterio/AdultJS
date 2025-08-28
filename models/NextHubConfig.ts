@@ -2,6 +2,7 @@ export interface NextHubConfig {
     enable: boolean;
     displayname: string;
     host: string;
+    charset?: string;
     menu?: {
         route?: { [key: string]: string } | any;
         sort?: { [title: string]: string };

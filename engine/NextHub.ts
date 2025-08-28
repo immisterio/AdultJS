@@ -284,7 +284,7 @@ export class NextHub {
                 // Make iframe URL absolute if it's relative
                 const absoluteIframeUrl = iframeUrl.startsWith('http') ? iframeUrl : cfg.host + iframeUrl;
                 // Get content from iframe URL
-                html = await HttpClient.Get(absoluteIframeUrl);
+                html = await HttpClient.Get(absoluteIframeUrl, undefined, cfg.charset);
             }
         }
 
@@ -386,7 +386,7 @@ export class NextHub {
             const decodedHref = decodeURIComponent(href);
             let cleanUrl = decodedHref.replace('&related?pg=1', '');
 
-            const html = await HttpClient.Get(cleanUrl);
+            const html = await HttpClient.Get(cleanUrl, undefined, cfg.charset);
             const streamResult = await this.extractStreams(html, cfg);
 
             return new StreamLinksUnified(streamResult, mode === 'related' || decodedHref.includes('&related'));
@@ -397,7 +397,7 @@ export class NextHub {
 
             const page = Number(uri.searchParams.get('pg') || '1');
             const url = this.buildModelUrl(cfg, modelUrl, page);
-            const html = await HttpClient.Get(url);
+            const html = await HttpClient.Get(url, undefined, cfg.charset);
             const doc = parseHTML(html);
 
             return {
@@ -412,7 +412,7 @@ export class NextHub {
             const page = Number(uri.searchParams.get('pg') || '1');
 
             const url = this.buildSearchUrl(cfg, q, page);
-            const html = await HttpClient.Get(url);
+            const html = await HttpClient.Get(url, undefined, cfg.charset);
             const doc = parseHTML(html);
             return {
                 menu: this.buildMenu(cfg, undefined, undefined, false),
@@ -425,7 +425,7 @@ export class NextHub {
             const page = Number(uri.searchParams.get('pg') || '1');
 
             const url = this.buildListUrl(cfg, page, sortKey, catSlug);
-            const html = await HttpClient.Get(url);
+            const html = await HttpClient.Get(url, undefined, cfg.charset);
             const doc = parseHTML(html);
             return {
                 menu: this.buildMenu(cfg, sortKey, catSlug, false),
