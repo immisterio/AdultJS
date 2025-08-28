@@ -202,9 +202,24 @@ export class NextHub {
 
             const title = nameNode ? (nameNode.textContent || '').trim() : (hrefNode?.getAttribute('title') || '');
             const href = hrefNode ? (hrefNode.getAttribute(parseConfig.href.attribute || 'href') || '') : '';
-            const img = parseConfig.img ? firstAttr(imgNode, (parseConfig.img.attributes as any) || parseConfig.img.attribute || 'src') : '';
+            let img = parseConfig.img ? firstAttr(imgNode, (parseConfig.img.attributes as any) || parseConfig.img.attribute || 'src') : '';
             const preview = parseConfig.preview ? firstAttr(previewNode, parseConfig.preview.attribute || 'data-preview') : null;
             const time = durNode ? (durNode.textContent || '').trim() : null;
+
+            // Process image URL
+            if (img) {
+                img = img.replace(/&amp;/g, '&').replace(/\\/g, '');
+
+                if (img.startsWith('../')) {
+                    img = `${cfg.host}/${img.replace('../', '')}`;
+                } else if (img.startsWith('//')) {
+                    img = `https:${img}`;
+                } else if (img.startsWith('/')) {
+                    img = cfg.host + img;
+                } else if (!img.startsWith('http')) {
+                    img = `${cfg.host}/${img}`;
+                }
+            }
 
             if (!href || !title || !img) continue;
 
@@ -268,7 +283,7 @@ export class NextHub {
         // Get matches array or use default
         const matches = cfg.view.regexMatch.matches || [''];
 
-        // Process each match value
+        // Process each match value - stop after first successful match
         for (const matchValue of matches) {
             let pattern = cfg.view.regexMatch.pattern;
 
@@ -280,6 +295,8 @@ export class NextHub {
             const rx = new RegExp(pattern, 'g');
             let m: RegExpExecArray | null;
             let i = 0;
+            let foundMatch = false;
+
             while ((m = rx.exec(html))) {
                 const url = m[1];
                 if (!url) continue;
@@ -295,6 +312,12 @@ export class NextHub {
                 const key = matchValue + (i ? '_' + i : '');
                 streams[key] = finalUrl;
                 i++;
+                foundMatch = true;
+            }
+
+            // If we found a match for this quality, stop processing other qualities
+            if (foundMatch) {
+                break;
             }
         }
 
