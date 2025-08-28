@@ -72,7 +72,8 @@ export class Eporner {
                 duration || null,
                 quality || null,
                 true,
-                true
+                true,
+                null
             ));
         }
         return playlists;

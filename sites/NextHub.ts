@@ -44,7 +44,8 @@ export const CONFIGS: NextHubConfig[] = [
             route: {
                 cat: "{host}/{cat}/page/{page}",
                 sort: "{host}/{sort}/page/{page}",
-                catsort: "{host}/{cat}-top/page/{page}"
+                catsort: "{host}/{cat}-top/page/{page}",
+                model: "{model}/page/{page}"
             },
             sort: {
                 "Новые": "",

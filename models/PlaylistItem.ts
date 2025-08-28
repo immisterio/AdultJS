@@ -7,6 +7,7 @@ export class PlaylistItem {
     quality: string | null;
     json: boolean;
     related: boolean;
+    model: { uri: string; name: string } | null;
 
     constructor(
         name: string,
@@ -16,7 +17,8 @@ export class PlaylistItem {
         time: string | null,
         quality: string | null,
         json: boolean,
-        related: boolean
+        related: boolean,
+        model: { uri: string; name: string } | null,
     ) {
         this.name = name;
         this.video = video;
@@ -26,5 +28,6 @@ export class PlaylistItem {
         this.quality = quality;
         this.json = json;
         this.related = related;
+        this.model = model;
     }
 }

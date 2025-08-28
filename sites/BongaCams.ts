@@ -66,7 +66,8 @@ export class BongaCams {
                 null, // time
                 quality,
                 false,
-                false
+                false,
+                null
             ));
         });
 

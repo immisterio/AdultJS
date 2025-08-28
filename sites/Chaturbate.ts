@@ -54,7 +54,8 @@ export class Chaturbate {
                 null,
                 null,
                 true,
-                false
+                false,
+                null
             ));
         }
         return playlists;

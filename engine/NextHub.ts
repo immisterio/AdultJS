@@ -106,6 +106,19 @@ export class NextHub {
         return joinUrl(cfg.host, path);
     }
 
+    private buildModelUrl(cfg: NextHubConfig, modelUrl: string, page: number): string {
+        const route = cfg?.menu?.route?.model;
+        const decodedModelUrl = decodeURIComponent(modelUrl);
+
+        // Replace placeholders in the route
+        let finalUrl = route
+            .replace('{host}', cfg.host)
+            .replace('{model}', decodedModelUrl)
+            .replace('{page}', String(page));
+
+        return finalUrl;
+    }
+
     private buildMenu(cfg: NextHubConfig, sortKey?: string, catSlug?: string, isViewMode: boolean = false, currentHref?: string): MenuItem[] {
         const menu: MenuItem[] = [];
 
@@ -198,6 +211,25 @@ export class NextHub {
             // Ensure href is a complete URL for video viewing
             const videoUrl = href.startsWith('http') ? href : cfg.host.replace(/\/?$/, '/') + href.replace(/^\/?/, '');
 
+            // Check for model information
+            let model: { uri: string; name: string } | null = null;
+            if (parseConfig.model) {
+                const modelNameNode = parseConfig.model.name ? xpathOne(doc, parseConfig.model.name.node, el) : null;
+                const modelHrefNode = parseConfig.model.href ? xpathOne(doc, parseConfig.model.href.node, el) as Element | null : null;
+
+                if (modelNameNode && modelHrefNode && parseConfig.model.href) {
+                    const modelName = (modelNameNode.textContent || '').trim();
+                    const modelHref = modelHrefNode.getAttribute(parseConfig.model.href.attribute || 'href') || '';
+
+                    if (modelName && modelHref) {
+                        model = {
+                            uri: `nexthub://${cfg.displayname.toLowerCase()}?mode=model&model=${encodeURIComponent(modelHref)}`,
+                            name: modelName
+                        };
+                    }
+                }
+            }
+
             items.push(new PlaylistItem(
                 title,
                 videoUrl,
@@ -206,7 +238,8 @@ export class NextHub {
                 time,
                 null,
                 true,
-                cfg.view?.related || false
+                cfg.view?.related || false,
+                model
             ));
         }
         return items;
@@ -283,6 +316,8 @@ export class NextHub {
 
         if (!cfg) return 'unknown nexthub site';
 
+        console.log(`NextHub: Invoke ${reqUri}`);
+
         const mode = uri.searchParams.get('mode') || 'list';
         if (mode === 'view' || mode === 'related') {
             const href = uri.searchParams.get('href');
@@ -295,6 +330,20 @@ export class NextHub {
             const streamResult = await this.extractStreams(html, cfg);
 
             return new StreamLinksUnified(streamResult, mode === 'related' || decodedHref.includes('&related'));
+        }
+        else if (mode === 'model') {
+            const modelUrl = uri.searchParams.get('model');
+            if (!modelUrl) return 'no model param';
+
+            const page = Number(uri.searchParams.get('pg') || '1');
+            const url = this.buildModelUrl(cfg, modelUrl, page);
+            const html = await HttpClient.Get(url);
+            const doc = parseHTML(html);
+
+            return {
+                menu: this.buildMenu(cfg, undefined, undefined, false),
+                list: this.toPlaylist(doc, cfg)
+            };
         }
         else if (mode === 'search') {
             const searchParams = uri.searchParams.getAll('search');

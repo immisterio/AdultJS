@@ -64,7 +64,8 @@ export class Xnxx {
                 duration || null,
                 quality || null,
                 true,
-                true
+                true,
+                null
             ));
         }
         return playlists;
@@ -96,7 +97,8 @@ export class Xnxx {
                         '',
                         null,
                         true,
-                        true
+                        true,
+                        null
                     ));
                 }
             } catch { }

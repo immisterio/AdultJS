@@ -85,7 +85,8 @@ export class Xvideos {
                 duration || null,
                 qmark || null,
                 true,
-                true
+                true,
+                null
             ));
         }
         return playlists;
@@ -178,7 +179,8 @@ export class Xvideos {
                         r.d || '',
                         null,
                         true,
-                        true
+                        true,
+                        null
                     ));
                 }
             } catch { }

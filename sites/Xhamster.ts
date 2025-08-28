@@ -77,7 +77,8 @@ export class Xhamster {
                     duration ? duration.trim() : "",
                     quality,
                     true,
-                    true
+                    true,
+                    null
                 ));
             }
         }
