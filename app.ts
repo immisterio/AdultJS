@@ -33,6 +33,7 @@ import { RusvideosConfig } from './sites/Rusvideos';
 import { VepornConfig } from './sites/Veporn';
 import { GayPornTubeConfig } from './sites/GayPornTube';
 import { VtraheConfig } from './sites/Vtrahe';
+import { VtraheTVConfig } from './sites/VtraheTV';
 
 // Combine all configurations
 const CONFIGS = [
@@ -59,7 +60,8 @@ const CONFIGS = [
     RusvideosConfig,
     VepornConfig,
     GayPornTubeConfig,
-    VtraheConfig
+    VtraheConfig,
+    VtraheTVConfig
 ];
 
 

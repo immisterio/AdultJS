@@ -7,13 +7,13 @@ export const VtraheConfig: NextHubConfig = {
     charset: "windows-1251",
     menu: {
         route: {
-            sort: "{host}/{sort}",
+            sort: "{host}/{sort}/page/{page}/",
             cat: "{host}/{cat}/page/{page}/"
         },
         sort: {
             "Новинки": "",
-            "Рейтинговое": "top/page/{page}/",
-            "Популярнаe": "most-popular/page/{page}/"
+            "Рейтинговое": "top",
+            "Популярнаe": "most-popular"
         },
         categories: {
             "Full HD": "fullhd",
