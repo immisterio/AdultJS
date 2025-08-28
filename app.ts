@@ -24,6 +24,8 @@ import { Porno666Config } from './sites/Porno666';
 import { PornoBrizConfig } from './sites/PornoBriz';
 import { SemBatsaConfig } from './sites/SemBatsa';
 import { SosushkaConfig } from './sites/Sosushka';
+import { YoujizzConfig } from './sites/Youjizz';
+import { VpornoConfig } from './sites/Vporno';
 
 // Combine all configurations
 const CONFIGS = [
@@ -41,7 +43,9 @@ const CONFIGS = [
     Porno666Config,
     PornoBrizConfig,
     SemBatsaConfig,
-    SosushkaConfig
+    SosushkaConfig,
+    YoujizzConfig,
+    VpornoConfig
 ];
 
 
