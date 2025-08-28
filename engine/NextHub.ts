@@ -212,8 +212,21 @@ export class NextHub {
         return items;
     }
 
-    private extractStreams(html: string, cfg: NextHubConfig): StreamLinksResult {
+    private async extractStreams(html: string, cfg: NextHubConfig): Promise<StreamLinksResult> {
         const streams: Record<string, string> = {};
+
+        // Check if we need to extract iframe first
+        if (cfg.view?.iframe?.pattern) {
+            const iframeRx = new RegExp(cfg.view.iframe.pattern, 'g');
+            const iframeMatch = iframeRx.exec(html);
+            if (iframeMatch && iframeMatch[1]) {
+                const iframeUrl = iframeMatch[1];
+                // Make iframe URL absolute if it's relative
+                const absoluteIframeUrl = iframeUrl.startsWith('http') ? iframeUrl : cfg.host + iframeUrl;
+                // Get content from iframe URL
+                html = await HttpClient.Get(absoluteIframeUrl);
+            }
+        }
 
         if (!cfg.view?.regexMatch?.pattern) {
             return new StreamLinksResult(streams, []);
@@ -279,7 +292,7 @@ export class NextHub {
             let cleanUrl = decodedHref.replace('&related?pg=1', '');
 
             const html = await HttpClient.Get(cleanUrl);
-            const streamResult = this.extractStreams(html, cfg);
+            const streamResult = await this.extractStreams(html, cfg);
 
             return new StreamLinksUnified(streamResult, mode === 'related' || decodedHref.includes('&related'));
         }
