@@ -62,8 +62,11 @@ export class NextHub {
 
         if (cfg.menu?.route) {
             if (hasCategory && hasSort && cfg.menu.route['catsort']) {
-                // Both category and sort specified
+                // Both category and sort specified - use catsort route
                 route = cfg.menu.route['catsort'];
+            } else if (hasCategory && hasSort && !cfg.menu.route['catsort']) {
+                // Both category and sort specified but no catsort route - prioritize category
+                route = cfg.menu.route['cat'];
             } else if (hasCategory && cfg.menu.route['cat']) {
                 // Only category specified
                 route = cfg.menu.route['cat'];
@@ -125,7 +128,8 @@ export class NextHub {
             const sortItems: MenuItem[] = [];
             for (const [title, slug] of Object.entries(cfg.menu.sort)) {
                 let url = `nexthub://${cfg.displayname}?mode=list&sort=${encodeURIComponent(title)}`;
-                if (catSlug) {
+                // Only add category parameter if catsort route exists
+                if (catSlug && cfg.menu?.route?.catsort) {
                     url += `&cat=${encodeURIComponent(catSlug)}`;
                 }
                 sortItems.push(new MenuItem(title, url));
@@ -142,14 +146,17 @@ export class NextHub {
             for (const [title, slug] of Object.entries(cfg.menu.categories)) {
                 let url = `nexthub://${cfg.displayname}?mode=list&cat=${encodeURIComponent(slug)}`;
 
-                // Automatically detect default sort
-                const defaultSortKey = Object.keys(cfg.menu?.sort || {}).find(key => {
-                    const value = cfg.menu?.sort?.[key];
-                    return !value || value === '';
-                });
+                // Only add sort parameter if catsort route exists
+                if (cfg.menu?.route?.catsort) {
+                    // Automatically detect default sort
+                    const defaultSortKey = Object.keys(cfg.menu?.sort || {}).find(key => {
+                        const value = cfg.menu?.sort?.[key];
+                        return !value || value === '';
+                    });
 
-                if (sortKey && sortKey !== defaultSortKey) {
-                    url += `&sort=${encodeURIComponent(sortKey)}`;
+                    if (sortKey && sortKey !== defaultSortKey) {
+                        url += `&sort=${encodeURIComponent(sortKey)}`;
+                    }
                 }
                 catItems.push(new MenuItem(title, url));
             }
