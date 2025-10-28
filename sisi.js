@@ -397,7 +397,7 @@
       Lampa.Activity.all().forEach(function(active) {
         if (_this.activity == active.activity) active.activity.render().find('.activity__body > div')[0].appendChild(empty.render(true));
       });
-      this.start = empty.start;
+      this.start = empty.start.bind(empty);
       this.activity.loader(false);
       this.activity.toggle();
     };
