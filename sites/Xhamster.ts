@@ -87,14 +87,17 @@ export class Xhamster {
     }
 
     StreamLinks(html: string): StreamLinksResult {
-        let match = /rel="preload" href="([^\"]+)"/.exec(html);
-        let stream_link = match && match[1] ? match[1].replace(/\\/g, "") : "";
+        const h264Match = /"h264":\[\{"url":"([^"]+)"/.exec(html);
+        let stream_link = h264Match?.[1]?.replace(/\\/g, "") ?? "";
 
-        if (!stream_link.includes(".m3u"))
-            new StreamLinksResult({}, []);
+        if (!stream_link.includes(".m3u")) {
+            const preloadMatch = /rel="preload"\s+href="([^"]+)"/.exec(html);
+            stream_link = preloadMatch?.[1]?.replace(/\\/g, "") ?? "";
+        }
 
-        if (stream_link.startsWith("/")) 
+        if (stream_link.startsWith("/")) {
             stream_link = Xhamster.host + stream_link;
+        }
 
         return new StreamLinksResult(
             { auto: stream_link },
