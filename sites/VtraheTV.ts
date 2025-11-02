@@ -3,7 +3,7 @@ import { NextHubConfig } from '../models/NextHubConfig';
 export const VtraheTVConfig: NextHubConfig = {
     enable: true,
     displayname: "VtraheTV",
-    host: "https://net.vtrahe.page",
+    host: "https://new.vtrahe.work",
     menu: {
         route: {
             sort: "{host}/{sort}/page/{page}/",

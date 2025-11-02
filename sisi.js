@@ -433,6 +433,7 @@
       var _this = this;
 
       this.activity.loader(true);
+	  comp.render().find('category-full').addClass('mapping--grid cols--3');
       Api.view(object, function(data) {
         menu = data.menu;
 
