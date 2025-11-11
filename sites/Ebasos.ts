@@ -3,7 +3,7 @@ import { NextHubConfig } from '../models/NextHubConfig';
 export const EbasosConfig: NextHubConfig = {
     enable: true,
     displayname: "Ebasos",
-    host: "https://wej.ebasos.club",
+    host: "https://wel.ebasos.club",
     menu: {
         route: {
             sort: "{host}/{sort}/{page}/",

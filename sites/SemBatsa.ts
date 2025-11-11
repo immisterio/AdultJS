@@ -1,7 +1,7 @@
 import { NextHubConfig } from '../models/NextHubConfig';
 
 export const SemBatsaConfig: NextHubConfig = {
-    enable: true,
+    enable: false,
     displayname: "SemBatsa",
     host: "https://sem.batsa.pro",
     menu: {

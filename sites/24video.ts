@@ -3,7 +3,7 @@ import { NextHubConfig } from '../models/NextHubConfig';
 export const Video24Config: NextHubConfig = {
     enable: true,
     displayname: "24video",
-    host: "https://vk.24videos.cc",
+    host: "https://sex.24videos.space",
     menu: {
         route: {
             cat: "{host}/{cat}/page-{page}/",

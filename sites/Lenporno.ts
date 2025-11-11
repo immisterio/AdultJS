@@ -3,7 +3,7 @@ import { NextHubConfig } from '../models/NextHubConfig';
 export const LenpornoConfig: NextHubConfig = {
     enable: true,
     displayname: "Lenporno",
-    host: "https://xxx.lenporno.xyz",
+    host: "https://pepa.lenporno.xyz",
     menu: {
         route: {
             cat: "{host}/{cat}/{page}/",
