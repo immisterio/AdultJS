@@ -18,15 +18,32 @@ export const GayPornTubeConfig: NextHubConfig = {
             "Длинные": "longest"
         }
     },
-    list: { uri: "page{page}.html" },
-    search: { uri: "search/videos/{search}/page{page}.html" },
+    list: {
+        uri: "page{page}.html"
+    },
+    search: {
+        uri: "search/videos/{search}/page{page}.html"
+    },
     contentParse: {
         nodes: "//div[contains(@class,'item') and contains(@class,'item-col')]",
-        name: { node: ".//a[contains(@class,'title')]" },
-        href: { node: ".//a[contains(@class,'title')]", attribute: "href" },
-        img: { node: ".//img", attributes: ["data-src", "src"] },
-        preview: { node: ".//img", attribute: "data-preview" },
-        duration: { node: ".//div[contains(@class,'duration')]" }
+        name: {
+            node: ".//a[contains(@class,'title')]"
+        },
+        href: {
+            node: ".//a[contains(@class,'title')]",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attributes: ["data-src", "src"]
+        },
+        preview: {
+            node: ".//img",
+            attribute: "data-preview"
+        },
+        duration: {
+            node: ".//div[contains(@class,'duration')]"
+        }
     },
     view: {
         related: true,

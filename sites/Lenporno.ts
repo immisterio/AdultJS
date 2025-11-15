@@ -80,14 +80,28 @@ export const LenpornoConfig: NextHubConfig = {
             "Full HD": "full-hd"
         }
     },
-    list: { uri: "new-update/{page}/" },
-    search: { uri: "search/{search}/{page}/" },
+    list: {
+        uri: "new-update/{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}/"
+    },
     contentParse: {
         nodes: "//div[@class='innercont']",
-        name: { node: ".//a[@class='preview_link']" },
-        href: { node: ".//a[@class='preview_link']", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//div[@class='duration']" }
+        name: {
+            node: ".//a[@class='preview_link']"
+        },
+        href: {
+            node: ".//a[@class='preview_link']",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//div[@class='duration']"
+        }
     },
     view: {
         related: true,

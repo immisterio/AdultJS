@@ -49,15 +49,32 @@ export const JopaOnlineConfig: NextHubConfig = {
             "Межрасовое": "mejrassovyy"
         }
     },
-    list: { uri: "{page}" },
-    search: { uri: "search/{search}/{page}" },
+    list: {
+        uri: "{page}"
+    },
+    search: {
+        uri: "search/{search}/{page}"
+    },
     contentParse: {
         nodes: "//div[@class='th']",
-        name: { node: ".//p" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//div[@class='th-duration']" },
-        preview: { node: ".//img", attribute: "data-preview" }
+        name: {
+            node: ".//p"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//div[@class='th-duration']"
+        },
+        preview: {
+            node: ".//img",
+            attribute: "data-preview"
+        }
     },
     view: {
         related: true,

@@ -525,14 +525,28 @@ export const PornOneConfig: NextHubConfig = {
             "Zimbabwean": "zimbabwean"
         }
     },
-    list: { uri: "{page}/" },
-    search: { uri: "search?q={search}&sort=relevance&page={page}" },
+    list: {
+        uri: "{page}/"
+    },
+    search: {
+        uri: "search?q={search}&sort=relevance&page={page}"
+    },
     contentParse: {
         nodes: "//a[@class='popbop vidLinkFX  videocard linkage']",
-        name: { node: ".//div[@class='videotitle ']" },
-        href: { node: ".", attribute: "href" },
-        img: { node: ".//img[contains(@class, 'lazy-loading')]", attribute: "data-src" },
-        duration: { node: ".//span[@class='durlabel']" }
+        name: {
+            node: ".//div[@class='videotitle ']"
+        },
+        href: {
+            node: ".",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img[contains(@class, 'lazy-loading')]",
+            attribute: "data-src"
+        },
+        duration: {
+            node: ".//span[@class='durlabel']"
+        }
     },
     view: {
         related: true,

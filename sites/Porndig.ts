@@ -106,15 +106,32 @@ export const PorndigConfig: NextHubConfig = {
             "Молодые черные": "812/young-black"
         }
     },
-    list: { uri: "video/page/{page}" },
-    search: { uri: "channels/33/{search}/page/{page}" },
+    list: {
+        uri: "video/page/{page}"
+    },
+    search: {
+        uri: "channels/33/{search}/page/{page}"
+    },
     contentParse: {
         nodes: "//section[contains(@class, 'video_item_wrapper even_item video_item_medium')]",
-        name: { node: ".//a" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img[@class='thumb_preview hidden']", attribute: "data-src" },
-        duration: { node: ".//div[@class='bubble bubble_duration']//span" },
-        preview: { node: ".//img[contains(@class, 'js_video_preview')]", attribute: "data-vid" }
+        name: {
+            node: ".//a"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img[@class='thumb_preview hidden']",
+            attribute: "data-src"
+        },
+        duration: {
+            node: ".//div[@class='bubble bubble_duration']//span"
+        },
+        preview: {
+            node: ".//img[contains(@class, 'js_video_preview')]",
+            attribute: "data-vid"
+        }
     },
     view: {
         related: true,

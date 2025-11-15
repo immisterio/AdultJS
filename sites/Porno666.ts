@@ -59,15 +59,32 @@ export const Porno666Config: NextHubConfig = {
             "Японское": "yaponskoe"
         }
     },
-    list: { uri: "latest-updates/{page}/" },
-    search: { uri: "search/{search}/{page}/" },
+    list: {
+        uri: "latest-updates/{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}/"
+    },
     contentParse: {
         nodes: "//div[@class='item trailer']",
-        name: { node: ".//strong" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "data-original" },
-        duration: { node: ".//div[@class='duration']" },
-        preview: { node: ".//img", attribute: "data-preview" }
+        name: {
+            node: ".//strong"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-original"
+        },
+        duration: {
+            node: ".//div[@class='duration']"
+        },
+        preview: {
+            node: ".//img",
+            attribute: "data-preview"
+        }
     },
     view: {
         related: true,

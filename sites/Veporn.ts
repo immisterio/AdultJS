@@ -74,14 +74,28 @@ export const VepornConfig: NextHubConfig = {
             "vibrator": "vibrator"
         }
     },
-    list: { uri: "page/{page}/" },
-    search: { uri: "page/{page}/?s={search}" },
+    list: {
+        uri: "page/{page}/"
+    },
+    search: {
+        uri: "page/{page}/?s={search}"
+    },
     contentParse: {
         nodes: "//article[contains(@class, 'loop-post vdeo')]",
-        name: { node: ".//h2" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//p//span[2]" }
+        name: {
+            node: ".//h2"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//p//span[2]"
+        }
     },
     view: {
         related: true,

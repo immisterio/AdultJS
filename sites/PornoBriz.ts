@@ -89,15 +89,32 @@ export const PornoBrizConfig: NextHubConfig = {
             "Эротика": "erotika"
         }
     },
-    list: { uri: "new/page{page}/" },
-    search: { uri: "search/{search}/page{page}/" },
+    list: {
+        uri: "new/page{page}/"
+    },
+    search: {
+        uri: "search/{search}/page{page}/"
+    },
     contentParse: {
         nodes: "//div[contains(@class, 'thumb_main')]",
-        name: { node: ".//div[@class='th-title']" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "data-original" },
-        duration: { node: ".//div[@class='duration']" },
-        preview: { node: ".//video", attribute: "data-preview" }
+        name: {
+            node: ".//div[@class='th-title']"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-original"
+        },
+        duration: {
+            node: ".//div[@class='duration']"
+        },
+        preview: {
+            node: ".//video",
+            attribute: "data-preview"
+        }
     },
     view: {
         regexMatch: {

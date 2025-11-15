@@ -77,14 +77,28 @@ export const Video24Config: NextHubConfig = {
             "Худые": "porno-khudyye"
         }
     },
-    list: { uri: "page-{page}/" },
-    search: { uri: "search/{search}/page-{page}/" },
+    list: {
+        uri: "page-{page}/"
+    },
+    search: {
+        uri: "search/{search}/page-{page}/"
+    },
     contentParse: {
         nodes: "//div[@class='item video-block']",
-        name: { node: ".//div[@class='title']" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "data-original" },
-        duration: { node: ".//span[@class='duration']" }
+        name: {
+            node: ".//div[@class='title']"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-original"
+        },
+        duration: {
+            node: ".//span[@class='duration']"
+        }
     },
     view: {
         related: true,

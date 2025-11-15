@@ -53,15 +53,32 @@ export const SosushkaConfig: NextHubConfig = {
             "Черноволосые": "black-haired"
         }
     },
-    list: { uri: "new/page{page}/" },
-    search: { uri: "search/{search}/" },
+    list: {
+        uri: "new/page{page}/"
+    },
+    search: {
+        uri: "search/{search}/"
+    },
     contentParse: {
         nodes: "//div[@class='thumb']",
-        name: { node: ".//p" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "data-src" },
-        duration: { node: ".//span[@class='right']" },
-        preview: { node: ".//div", attribute: "data-preview-src" }
+        name: {
+            node: ".//p"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-src"
+        },
+        duration: {
+            node: ".//span[@class='right']"
+        },
+        preview: {
+            node: ".//div",
+            attribute: "data-preview-src"
+        }
     },
     view: {
         iframe: {

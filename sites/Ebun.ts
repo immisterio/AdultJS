@@ -119,14 +119,28 @@ export const EbunConfig: NextHubConfig = {
             "Японское": "yaponskoe"
         }
     },
-    list: { uri: "latest-updates/{page}/" },
-    search: { uri: "search/{search}/{page}/" },
+    list: {
+        uri: "latest-updates/{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}/"
+    },
     contentParse: {
         nodes: "//div[contains(@class, 'item th-item item_new')]",
-        name: { node: ".//div[@class='item-title']" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "data-src" },
-        duration: { node: ".//div[@class='meta-time']" }
+        name: {
+            node: ".//div[@class='item-title']"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-src"
+        },
+        duration: {
+            node: ".//div[@class='meta-time']"
+        }
     },
     view: {
         iframe: {

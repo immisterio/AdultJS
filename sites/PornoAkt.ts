@@ -37,14 +37,28 @@ export const PornoAktConfig: NextHubConfig = {
             "Черные": "chernye"
         }
     },
-    list: { uri: "page/{page}/" },
-    search: { uri: "index.php?do=search&subaction=search&search_start={page}&full_search=0&result_from=25&story={search}" },
+    list: {
+        uri: "page/{page}/"
+    },
+    search: {
+        uri: "index.php?do=search&subaction=search&search_start={page}&full_search=0&result_from=25&story={search}"
+    },
     contentParse: {
         nodes: "//article[contains(@class, 'shortstory')]",
-        name: { node: ".//h2//a" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//div[@class='video_time']" }
+        name: {
+            node: ".//h2//a"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//div[@class='video_time']"
+        }
     },
     view: {
         related: true,

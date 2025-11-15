@@ -46,15 +46,32 @@ export const PornoboltConfig: NextHubConfig = {
             "Жесткий секс": "zhestkij-seks"
         }
     },
-    list: { uri: "{page}/" },
-    search: { uri: "search/{search}/{page}" },
+    list: {
+        uri: "{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}"
+    },
     contentParse: {
         nodes: "//div[@class='media-obj widethumb']",
-        name: { node: ".//p" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attributes: ["data-original", "src"] },
-        duration: { node: ".//span[@itemprop='duration']" },
-        preview: { node: ".//img", attribute: "data-video" }
+        name: {
+            node: ".//p"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attributes: ["data-original", "src"]
+        },
+        duration: {
+            node: ".//span[@itemprop='duration']"
+        },
+        preview: {
+            node: ".//img",
+            attribute: "data-video"
+        }
     },
     view: {
         related: true,

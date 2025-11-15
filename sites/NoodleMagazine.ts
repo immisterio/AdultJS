@@ -13,15 +13,32 @@ export const NoodleMagazineConfig: NextHubConfig = {
             "Популярное": "popular"
         }
     },
-    list: { uri: "now?p={page}" },
-    search: { uri: "video/{search}?p={page}" },
+    list: {
+        uri: "now?p={page}"
+    },
+    search: {
+        uri: "video/{search}?p={page}"
+    },
     contentParse: {
         nodes: "//div[contains(@class, 'item')]",
-        name: { node: ".//div[@class='title']" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "data-src" },
-        duration: { node: ".//div[@class='m_time']" },
-        preview: { node: ".//div", attribute: "data-trailer_url" }
+        name: {
+            node: ".//div[@class='title']"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-src"
+        },
+        duration: {
+            node: ".//div[@class='m_time']"
+        },
+        preview: {
+            node: ".//div",
+            attribute: "data-trailer_url"
+        }
     },
     view: {
         related: true,

@@ -62,15 +62,32 @@ export const RusvideosConfig: NextHubConfig = {
             "Русские заграницей": "russkie-zagranicej"
         }
     },
-    list: { uri: "{page}/" },
-    search: { uri: "poisk/{page}?q={search}" },
+    list: {
+        uri: "{page}/"
+    },
+    search: {
+        uri: "poisk/{page}?q={search}"
+    },
     contentParse: {
         nodes: "//div[@class='thumb wide']",
-        name: { node: ".//div[@class='thumb-title']" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attributes: ["data-original", "src"] },
-        duration: { node: ".//span[@class='ttime']" },
-        preview: { node: ".//img", attribute: "data-video" }
+        name: {
+            node: ".//div[@class='thumb-title']"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attributes: ["data-original", "src"]
+        },
+        duration: {
+            node: ".//span[@class='ttime']"
+        },
+        preview: {
+            node: ".//img",
+            attribute: "data-video"
+        }
     },
     view: {
         related: true,

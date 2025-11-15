@@ -79,14 +79,28 @@ export const VtraheTVConfig: NextHubConfig = {
             "Японки": "yaponki"
         }
     },
-    list: { uri: "page/{page}/" },
-    search: { uri: "search/{search}/page/{page}/" },
+    list: {
+        uri: "page/{page}/"
+    },
+    search: {
+        uri: "search/{search}/page/{page}/"
+    },
     contentParse: {
         nodes: "//div[@class='innercont']",
-        name: { node: ".//div[@class='preview_title']//a" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//div[@class='dlit']" }
+        name: {
+            node: ".//div[@class='preview_title']//a"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//div[@class='dlit']"
+        }
     },
     view: {
         related: true,

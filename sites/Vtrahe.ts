@@ -44,14 +44,28 @@ export const VtraheConfig: NextHubConfig = {
             "3D": "3d-porno"
         }
     },
-    list: { uri: "latest-updates/page/{page}/", firstpage: "" },
-    search: { uri: "?do=search&subaction=search&search_start={page}&full_search=0&result_from=25&story={search}" },
+    list: {
+        uri: "latest-updates/page/{page}/", firstpage: ""
+    },
+    search: {
+        uri: "?do=search&subaction=search&search_start={page}&full_search=0&result_from=25&story={search}"
+    },
     contentParse: {
         nodes: "//div[@class='innercont']",
-        name: { node: ".//div[@class='preview_title']//a" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//div[@class='dlit']" }
+        name: {
+            node: ".//div[@class='preview_title']//a"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//div[@class='dlit']"
+        }
     },
     view: {
         related: true,

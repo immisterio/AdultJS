@@ -80,14 +80,28 @@ export const Porno365Config: NextHubConfig = {
             "Full HD": "porno-hd"
         }
     },
-    list: { uri: "{page}/" },
-    search: { uri: "search/{search}/{page}/" },
+    list: {
+        uri: "{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}/"
+    },
     contentParse: {
         nodes: "//li[contains(@class, ' trailer')]",
-        name: { node: ".//p" },
-        href: { node: ".//a[@class='image']", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//span[@class='duration']" }
+        name: {
+            node: ".//p"
+        },
+        href: {
+            node: ".//a[@class='image']",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//span[@class='duration']"
+        }
     },
     view: {
         related: true,

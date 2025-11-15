@@ -134,18 +134,40 @@ export const LenkinoConfig: NextHubConfig = {
             "Сперма на пизде": "cum-on-pussy"
         }
     },
-    list: { uri: "page/{page}" },
-    search: { uri: "search/{search}/page/{page}" },
+    list: {
+        uri: "page/{page}"
+    },
+    search: {
+        uri: "search/{search}/page/{page}"
+    },
     contentParse: {
         nodes: "//div[@class='item']",
-        name: { node: ".//div[@class='itm-tit']" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img[@class='lzy']", attribute: "data-srcset" },
-        duration: { node: ".//div[@class='itm-dur fnt-cs']" },
-        preview: { node: ".//img[@class='lzy']", attribute: "data-preview" },
+        name: {
+            node: ".//div[@class='itm-tit']"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img[@class='lzy']",
+            attribute: "data-srcset"
+        },
+        duration: {
+            node: ".//div[@class='itm-dur fnt-cs']"
+        },
+        preview: {
+            node: ".//img[@class='lzy']",
+            attribute: "data-preview"
+        },
         model: {
-            name: { node: ".//a[@class='itm-opt-mdl len_pucl']" },
-            href: { node: ".//a[@class='itm-opt-mdl len_pucl']", attribute: "href" }
+            name: {
+                node: ".//a[@class='itm-opt-mdl len_pucl']"
+            },
+            href: {
+                node: ".//a[@class='itm-opt-mdl len_pucl']",
+                attribute: "href"
+            }
         }
     },
     view: {

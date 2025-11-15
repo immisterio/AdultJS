@@ -15,15 +15,32 @@ export const YoujizzConfig: NextHubConfig = {
             "В тренде": "trending"
         }
     },
-    list: { uri: "newest-clips/{page}.html" },
-    search: { uri: "search/{search}-{page}.html" },
+    list: {
+        uri: "newest-clips/{page}.html"
+    },
+    search: {
+        uri: "search/{search}-{page}.html"
+    },
     contentParse: {
         nodes: "//div[@class='video-thumb']",
-        name: { node: ".//div[@class='video-title']//a" },
-        href: { node: ".//a[contains(@class, 'frame video')]", attribute: "href" },
-        img: { node: ".//img", attribute: "data-original" },
-        duration: { node: ".//span[@class='time']" },
-        preview: { node: ".//a", attribute: "data-clip" }
+        name: {
+            node: ".//div[@class='video-title']//a"
+        },
+        href: {
+            node: ".//a[contains(@class, 'frame video')]",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "data-original"
+        },
+        duration: {
+            node: ".//span[@class='time']"
+        },
+        preview: {
+            node: ".//a",
+            attribute: "data-clip"
+        }
     },
     view: {
         related: true,

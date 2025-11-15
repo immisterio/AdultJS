@@ -77,15 +77,32 @@ export const SemBatsaConfig: NextHubConfig = {
             "Дрочка": "drochka"
         }
     },
-    list: { uri: "?page={page}" },
-    search: { uri: "search?q={search}" },
+    list: {
+        uri: "?page={page}"
+    },
+    search: {
+        uri: "search?q={search}"
+    },
     contentParse: {
         nodes: "//div[@class='grid-item aspect-ratio-16x9']",
-        name: { node: ".//div[@class='grid-item-description']//a" },
-        href: { node: ".//a[1]", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//span[contains(@class,'grid-item-dur')]" },
-        preview: { node: ".//video//source", attribute: "src" }
+        name: {
+            node: ".//div[@class='grid-item-description']//a"
+        },
+        href: {
+            node: ".//a[1]",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//span[contains(@class,'grid-item-dur')]"
+        },
+        preview: {
+            node: ".//video//source",
+            attribute: "src"
+        }
     },
     view: {
         related: true,

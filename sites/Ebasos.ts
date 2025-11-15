@@ -38,14 +38,28 @@ export const EbasosConfig: NextHubConfig = {
             "Толстые": "tolstye"
         }
     },
-    list: { uri: "latest-updates/{page}/" },
-    search: { uri: "search/{search}/{page}/" },
+    list: {
+        uri: "latest-updates/{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}/"
+    },
     contentParse: {
         nodes: "//div[@id='list_videos_common_videos_list_items']//div[contains(@class, 'item')]",
-        name: { node: ".//span[contains(@class, 'title')]" },
-        href: { node: ".//a", attribute: "href" },
-        img: { node: ".//img[contains(@class,'thumb')]", attribute: "data-original" },
-        duration: { node: ".//div[contains(@class, 'duration')]" }
+        name: {
+            node: ".//span[contains(@class, 'title')]"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img[contains(@class,'thumb')]",
+            attribute: "data-original"
+        },
+        duration: {
+            node: ".//div[contains(@class, 'duration')]"
+        }
     },
     view: {
         iframe: {

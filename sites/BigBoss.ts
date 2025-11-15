@@ -70,13 +70,25 @@ export const BigBossConfig: NextHubConfig = {
             "Эротика": "classic-sex"
         }
     },
-    list: { uri: "latest/{page}/" },
-    search: { uri: "search/{search}/page/{page}/" },
+    list: {
+        uri: "latest/{page}/"
+    },
+    search: {
+        uri: "search/{search}/page/{page}/"
+    },
     contentParse: {
         nodes: "//div[contains(@class,'main__ct-items')]//div[contains(@class,'main__ct-item')]",
-        name: { node: ".//div[contains(@class,'video-unit__caption')]" },
-        href: { node: ".//a[contains(@class,'video-unit')]", attribute: "href" },
-        img: { node: ".//img", attributes: ["data-src", "src"] }
+        name: {
+            node: ".//div[contains(@class,'video-unit__caption')]"
+        },
+        href: {
+            node: ".//a[contains(@class,'video-unit')]",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attributes: ["data-src", "src"]
+        }
     },
     view: {
         related: true,

@@ -36,14 +36,28 @@ export const PornkConfig: NextHubConfig = {
             "Блондинки": "blondinki"
         }
     },
-    list: { uri: "latest-updates/{page}/" },
-    search: { uri: "search/{search}/{page}/" },
+    list: {
+        uri: "latest-updates/{page}/"
+    },
+    search: {
+        uri: "search/{search}/{page}/"
+    },
     contentParse: {
         nodes: "//a[contains(@class, 'preview')]",
-        name: { node: ".//span[@class='preview-title']" },
-        href: { node: ".", attribute: "href" },
-        img: { node: ".//img", attribute: "src" },
-        duration: { node: ".//span[@class='preview-duration']" }
+        name: {
+            node: ".//span[@class='preview-title']"
+        },
+        href: {
+            node: ".",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attribute: "src"
+        },
+        duration: {
+            node: ".//span[@class='preview-duration']"
+        }
     },
     view: {
         related: true,
