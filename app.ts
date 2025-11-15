@@ -34,6 +34,7 @@ import { VepornConfig } from './sites/Veporn';
 import { GayPornTubeConfig } from './sites/GayPornTube';
 import { VtraheConfig } from './sites/Vtrahe';
 import { VtraheTVConfig } from './sites/VtraheTV';
+import { PorntrexConfig } from './sites/Porntrex';
 
 // Combine all configurations
 const CONFIGS = [
@@ -61,7 +62,8 @@ const CONFIGS = [
     VepornConfig,
     GayPornTubeConfig,
     VtraheConfig,
-    VtraheTVConfig
+    VtraheTVConfig,
+    PorntrexConfig
 ];
 
 
