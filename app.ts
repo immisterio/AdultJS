@@ -60,10 +60,10 @@ const CONFIGS = [
     PornOneConfig,
     RusvideosConfig,
     VepornConfig,
+    PorntrexConfig,
     GayPornTubeConfig,
     VtraheConfig,
-    VtraheTVConfig,
-    PorntrexConfig
+    VtraheTVConfig
 ];
 
 

@@ -6,8 +6,8 @@ export const PorntrexConfig: NextHubConfig = {
     host: "https://www.porntrex.com",
     menu: {
         route: {
-            sort: "{host}/{sort}/?page={page}",
-            cat: "{host}/categories/{cat}/?page={page}"
+            sort: "{host}/{sort}/{page}/",
+            cat: "{host}/categories/{cat}/{page}/"
         },
         sort: {
             "Новинки": "",
@@ -48,20 +48,30 @@ export const PorntrexConfig: NextHubConfig = {
             "Винтаж": "vintage"
         }
     },
-    list: { uri: "?page={page}", firstpage: "" },
-    search: { uri: "search/{search}/?page={page}" },
+    list: { uri: "latest-updates/{page}/" },
+    search: { uri: "search/{search}/latest-updates/{page}/" },
     contentParse: {
-        nodes: "//div[contains(@class,'video-item') or contains(@class,'video-card')]",
-        name: { node: ".//a[contains(@class,'title') or contains(@class,'video-title')]" },
-        href: { node: ".//a[@href]", attribute: "href" },
-        img: { node: ".//img", attributes: ["data-src", "data-original", "src"] },
-        duration: { node: ".//span[contains(@class,'duration') or contains(@class,'time')]" }
+        nodes: "//div[contains(@class,'video-preview-screen')]",
+        name: {
+            node: ".//p[@class='inf']//a"
+        },
+        href: {
+            node: ".//a",
+            attribute: "href"
+        },
+        img: {
+            node: ".//img",
+            attributes: ["data-src", "src"]
+        },
+        duration: {
+            node: ".//div[@class='durations']"
+        }
     },
     view: {
         related: true,
         regexMatch: {
-            matches: ["2160", "1440", "1080", "720", "480", "360"],
-            pattern: "\"(https?:\\/\\/[^\\\"']+{value}p?[^\\\"']*\\.mp4)\""
+            matches: ["2160p", "1440p", "1080p", "720p", "480p", "360p"],
+            pattern: "'(https?://[^/]+/get_file/[^']+_{value}.mp4/)'"
         }
     }
 };
