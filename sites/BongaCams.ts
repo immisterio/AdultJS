@@ -82,6 +82,7 @@ export class BongaCams {
             new MenuItem('Новые', host + 'new-models'),
             new MenuItem('Пары', host + 'couples'),
             new MenuItem('Девушки', host + 'female'),
+            new MenuItem('Русские модели', host + 'female/tags/russian'),
             new MenuItem('Парни', host + 'male'),
             new MenuItem('Транссексуалы', host + 'trans')
         ]

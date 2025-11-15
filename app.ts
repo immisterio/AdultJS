@@ -130,11 +130,6 @@ var nex = new NextHub(CONFIGS);
                 title: "eporner.com",
                 playlist_url: Eporner.host
             },
-            //{
-            //    title: "porntrex.com",
-            //    playlist_url: AppInit.Porntrex.overridehost ?? "ptx",
-            //    enable: AppInit.Porntrex.enable
-            //},
             {
                 title: "xnxx.com",
                 playlist_url: Xnxx.host
