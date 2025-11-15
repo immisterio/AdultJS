@@ -1,4 +1,3 @@
-import { PornHub } from './sites/PornHub';
 import { BongaCams } from './sites/BongaCams';
 import { Xhamster } from './sites/Xhamster';
 import { Xvideos } from './sites/Xvideos';
@@ -9,6 +8,7 @@ import { Eporner } from './sites/Eporner';
 import { NextHub } from './engine/NextHub';
 
 // Import all NextHub configurations
+import { PornHubConfig } from './sites/PornHub';
 import { LenkinoConfig } from './sites/Lenkino';
 import { LenpornoConfig } from './sites/Lenporno';
 import { Video24Config } from './sites/24video';
@@ -38,6 +38,7 @@ import { PorntrexConfig } from './sites/Porntrex';
 
 // Combine all configurations
 const CONFIGS = [
+    PornHubConfig,
     LenkinoConfig,
     LenpornoConfig,
     Video24Config,
@@ -67,7 +68,6 @@ const CONFIGS = [
 ];
 
 
-var phub = new PornHub();
 var bgs = new BongaCams();
 var xmr = new Xhamster();
 var xvd = new Xvideos();
@@ -100,10 +100,6 @@ var nex = new NextHub(CONFIGS);
 
     function menu() {
         const base = [
-            {
-                title: "pornhub.com",
-                playlist_url: PornHub.host + '/video'
-            },
             {
                 title: "xvideos.com",
                 playlist_url: Xvideos.host
@@ -158,8 +154,6 @@ var nex = new NextHub(CONFIGS);
     async function invk(url: string) {
         if (url.startsWith(BongaCams.host))
             return await bgs.Invoke(url);
-        else if (url.startsWith(PornHub.host))
-            return await phub.Invoke(url);
         else if (url.startsWith(Xhamster.host))
             return await xmr.Invoke(url);
         else if (url.startsWith(Xvideos.host))
