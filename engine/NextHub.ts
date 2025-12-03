@@ -294,7 +294,7 @@ export class NextHub {
                 const evalFunction = new Function('html', cfg.view.eval);
                 const result = evalFunction(html);
                 if (result) {
-                    streams['auto'] = result.replace(/\//, '').replace(/&amp;/, '&');
+                    streams['auto'] = result.replace(/&amp;/g, '&').replace(/\\/g, '');
                 }
             } catch (error) {
                 console.error('Eval execution error:', error);
@@ -307,7 +307,7 @@ export class NextHub {
             if (nodeFileElement) {
                 const fileUrl = firstAttr(nodeFileElement as Element, cfg.view.nodeFile.attribute);
                 if (fileUrl) {
-                    streams['auto'] = fileUrl.replace(/\//, '').replace(/&amp;/, '&');
+                    streams['auto'] = fileUrl.replace(/&amp;/g, '&').replace(/\\/g, '');
                 }
             }
         }
@@ -338,14 +338,14 @@ export class NextHub {
                     if (!url) continue;
 
                     // Apply format if specified
-                    let finalUrl = url.replace(/\//, '').replace(/&amp;/, '&');
+                    let finalUrl = url;
                     if (cfg.view.regexMatch.format) {
                         finalUrl = cfg.view.regexMatch.format
                             .replace('{host}', cfg.host)
-                            .replace('{value}', url.replace(/\//, '').replace(/&amp;/, '&'));
+                            .replace('{value}', url);
                     }
 
-                    streams["auto"] = finalUrl.replace(/\//, '').replace(/&amp;/, '&');
+                    streams["auto"] = finalUrl.replace(/\//, '').replace(/&amp;/g, '&').replace(/\\/g, '');
                     i++;
                     foundMatch = true;
                 }

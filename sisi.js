@@ -37,8 +37,6 @@
   }
 
   function play(element) {
-
-    console.log('AdultJS', 'play', element);
     var controller_enabled = Lampa.Controller.enabled().name;
               
     if (element.json) {
