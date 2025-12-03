@@ -345,7 +345,7 @@ export class NextHub {
                             .replace('{value}', url);
                     }
 
-                    streams["auto"] = finalUrl.replace(/\//, '').replace(/&amp;/g, '&').replace(/\\/g, '');
+                    streams["auto"] = finalUrl.replace(/&amp;/g, '&').replace(/\\/g, '');
                     i++;
                     foundMatch = true;
                 }
