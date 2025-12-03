@@ -294,7 +294,7 @@ export class NextHub {
                 const evalFunction = new Function('html', cfg.view.eval);
                 const result = evalFunction(html);
                 if (result) {
-                    streams['auto'] = result;
+                    streams['auto'] = result.replace(/^\//, '');
                 }
             } catch (error) {
                 console.error('Eval execution error:', error);
@@ -307,7 +307,7 @@ export class NextHub {
             if (nodeFileElement) {
                 const fileUrl = firstAttr(nodeFileElement as Element, cfg.view.nodeFile.attribute);
                 if (fileUrl) {
-                    streams['auto'] = fileUrl;
+                    streams['auto'] = fileUrl.replace(/^\//, '');
                 }
             }
         }
@@ -345,7 +345,7 @@ export class NextHub {
                             .replace('{value}', url);
                     }
 
-                    streams["auto"] = finalUrl;
+                    streams["auto"] = finalUrl.replace(/^\//, '');
                     i++;
                     foundMatch = true;
                 }
