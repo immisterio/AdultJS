@@ -338,11 +338,11 @@ export class NextHub {
                     if (!url) continue;
 
                     // Apply format if specified
-                    let finalUrl = url;
+                    let finalUrl = url.replace(/\//, '').replace(/&amp;/, '&');
                     if (cfg.view.regexMatch.format) {
                         finalUrl = cfg.view.regexMatch.format
                             .replace('{host}', cfg.host)
-                            .replace('{value}', url);
+                            .replace('{value}', url.replace(/\//, '').replace(/&amp;/, '&'));
                     }
 
                     streams["auto"] = finalUrl.replace(/\//, '').replace(/&amp;/, '&');

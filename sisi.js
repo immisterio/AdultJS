@@ -37,8 +37,10 @@
   }
 
   function play(element) {
-    var controller_enabled = Lampa.Controller.enabled().name;
 
+    console.log('AdultJS', 'play', element);
+    var controller_enabled = Lampa.Controller.enabled().name;
+              
     if (element.json) {
       Lampa.Loading.start(function() {
         network.clear();
@@ -282,7 +284,7 @@
 
     this.view = function(params, success, error) {
 	  AdultJS.Invoke(Lampa.Utils.addUrlComponent(params.url, 'pg=' + (params.page || 1))).then(function(json) {
-        if (json.list) {
+          if (json.list) {
           json.results = Utils.fixList(json.list);
           json.collection = true;
           json.total_pages = json.total_pages || 30;
